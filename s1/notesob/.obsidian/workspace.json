@@ -1,0 +1,290 @@
+{
+  "main": {
+    "id": "e9b4a119d88d941c",
+    "type": "split",
+    "children": [
+      {
+        "id": "ac471427fd91b52f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "38704cd48a460d51",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Chats/text.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "text"
+            }
+          },
+          {
+            "id": "b8b50202d2350018",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "command.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "command"
+            }
+          },
+          {
+            "id": "e2f05404789d45bd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "New folder/New note.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "New note"
+            }
+          },
+          {
+            "id": "7acd01c127f9776e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Gate.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Gate"
+            }
+          },
+          {
+            "id": "754e9981cf284082",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Untitled"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "010176a94b059387",
+    "type": "split",
+    "children": [
+      {
+        "id": "e0e88100ef93e9be",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "32ecba4e28f008dd",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "2fb1bfd9383f4346",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "path:Verilog ",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "baf80cd129568f81",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 258.5
+  },
+  "right": {
+    "id": "ca6f8f3cc2844de2",
+    "type": "split",
+    "children": [
+      {
+        "id": "fe7145d2879747bf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aef878b2473b278a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Chats/New Chat.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for New Chat"
+            }
+          },
+          {
+            "id": "85f91e801b183987",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Chats/New Chat.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from New Chat"
+            }
+          },
+          {
+            "id": "285a0b381361dc83",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "a545e8c9bb804a1d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Chats/New Chat.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of New Chat"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "quiz-generator:Open generator": false,
+      "edge-tts:Read note aloud": false,
+      "webpage-html-export:Export as HTML": false
+    }
+  },
+  "active": "7acd01c127f9776e",
+  "lastOpenFiles": [
+    "Reconfigurable Architecture VLSI/4x1 MUX/directory-listing.json",
+    "Reconfigurable Architecture VLSI/directory-listing.json",
+    "ML/directory-listing.json",
+    "Verilog/Module/Img/directory-listing.json",
+    "Verilog/Module/directory-listing.json",
+    "Verilog/Img/Img/directory-listing.json",
+    "Verilog/Img/directory-listing.json",
+    "Verilog/Gate Switch/directory-listing.json",
+    "Verilog/Full/directory-listing.json",
+    "Verilog/DataFllow/directory-listing.json",
+    "Verilog/Data Type & Operations/Images/directory-listing.json",
+    "DE/Boolean/logicGates&Laws.md",
+    "md.md",
+    "DE/Boolean.canvas",
+    "DE/Boolean/DeMorgan'sLaw.md",
+    "out.md",
+    "command.md",
+    "semiconductorJob.md",
+    "UI.md",
+    "ML/ml.canvas",
+    "Python/Py.canvas",
+    "DE/Simplification.canvas",
+    "DE/Number System.canvas",
+    "Reconfigurable Architecture VLSI/Unit_3.canvas",
+    "Reconfigurable Architecture VLSI/FF.canvas",
+    "Reconfigurable Architecture VLSI/Miscellaneous.canvas",
+    "Reconfigurable Architecture VLSI/Unit_2&1.canvas",
+    "DE/Combinational.canvas",
+    "CV.md",
+    "Gate.md",
+    "Chats/code.md",
+    "Chats/ques.md",
+    "Chats/text.md",
+    "DE/Boolean/3 In XNOR with 2 In XNOR.md",
+    "DE/Boolean/AbsorptionLaw.md",
+    "DE/Boolean/BooleanLaws.md",
+    "DE/Boolean/canonicalForm.md",
+    "DE/Boolean/duality.md",
+    "DE/Boolean/FunctionallyComplete.md",
+    "DE/Boolean/ImpQues.md",
+    "DE/Boolean/multivibrator.md",
+    "DE/Boolean/NoOfPossibleFunctions.md",
+    "DE/Boolean/RedundancyRemoval.md",
+    "DE/Boolean/UniversalGates.md",
+    "DE/Boolean/QAns/QAns.md",
+    "DE/Combinational/Adder.md",
+    "Pasted image 20250812141207.png",
+    "That Project - OV5640 for ESP32 Camera (Compared to OV2640) [BCvOBMQSliY - 1046x588 - 5m05s].png",
+    "That Project - OV5640 for ESP32 Camera (Compared to OV2640) [BCvOBMQSliY - 1046x588 - 4m43s].png",
+    "New folder/1_New note_dev-02-023-2.jpg",
+    "New folder/New note_dev-02-023-2.jpg",
+    "New folder/New note_cmareamodule2.png",
+    "New folder/New note_cmareamodule1.png",
+    "New folder/New note_cameramodule.jpg",
+    "New folder/New note_camera.png",
+    "New folder/New note_39.jpg"
+  ]
+}

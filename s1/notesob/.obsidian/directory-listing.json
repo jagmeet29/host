@@ -1,0 +1,19 @@
+{
+  "files": [
+    "app.json",
+    "appearance.json",
+    "community-plugins.json",
+    "core-plugins.json",
+    "directory-listing.json",
+    "graph.json",
+    "page-preview.json",
+    "workspace.json"
+  ],
+  "folders": [
+    "plugins",
+    "snippets",
+    "themes"
+  ],
+  "path": "D:\\my\\Whiteboards\\study\\Hosted\\s1\\notesob\\.obsidian",
+  "last_updated": "1755516083.7116709"
+}

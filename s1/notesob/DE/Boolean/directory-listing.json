@@ -1,0 +1,26 @@
+{
+  "files": [
+    "1.1_xnorxorProperties.md",
+    "1_logicGates.md",
+    "3 In XNOR with 2 In XNOR.md",
+    "AbsorptionLaw.md",
+    "BooleanLaws.md",
+    "DeMorgan'sLaw.md",
+    "FunctionallyComplete.md",
+    "ImpQues.md",
+    "NoOfPossibleFunctions.md",
+    "RedundancyRemoval.md",
+    "canonicalForm.md",
+    "directory-listing.json",
+    "duality.md",
+    "logicGates&Laws.md",
+    "multivibrator.md",
+    "selfDual&nonDual.md"
+  ],
+  "folders": [
+    "QAns",
+    "img"
+  ],
+  "path": "D:\\my\\Whiteboards\\study\\Hosted\\s1\\notesob\\DE\\Boolean",
+  "last_updated": "1755602179.7378008"
+}

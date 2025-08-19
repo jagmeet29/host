@@ -1,0 +1,16 @@
+{
+	"edges":[
+		{"id":"59a2e068035e4dcf","fromNode":"5f23222f5316be36","fromSide":"bottom","toNode":"fffb0b8fe6bba462","toSide":"top"}
+	],
+	"metadata":{
+		"frontmatter":{},
+		"version":"1.0-1.0"
+	},
+	"nodes":[
+		{"file":"Reconfigurable Architecture VLSI/ClockDivider/ClockDividerGenral.md","id":"5f23222f5316be36","type":"file","x":-940,"y":-910,"width":880,"height":860},
+		{"file":"Reconfigurable Architecture VLSI/FSM/FSM.md","id":"90ee1f700feb8069","type":"file","x":-1920,"y":-910,"width":880,"height":860},
+		{"file":"Reconfigurable Architecture VLSI/ClockDivider/ClockDividerCode.md","id":"fffb0b8fe6bba462","type":"file","x":-940,"y":50,"width":880,"height":860},
+		{"file":"Reconfigurable Architecture VLSI/7segment/7Segment.md","id":"2714ba73ce0f4026","type":"file","x":40,"y":-910,"width":880,"height":860},
+		{"file":"Reconfigurable Architecture VLSI/7segment/7Segment.md","id":"5db557cfc668c18d","type":"file","x":1040,"y":-910,"width":880,"height":860}
+	]
+}

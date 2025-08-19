@@ -1,0 +1,31 @@
+{
+  "files": [
+    "Digital design_Morris Mano_5th edition.pdf",
+    "FF.canvas",
+    "ImportantAns.md",
+    "Miscellaneous.canvas",
+    "Unit_2&1.canvas",
+    "Unit_3.canvas",
+    "directory-listing.json",
+    "important.md",
+    "vv.pdf"
+  ],
+  "folders": [
+    "3 Bit Comparator",
+    "3 To 8 Decoder",
+    "4-BitCarryLook‐AheadAdder",
+    "4x1 MUX",
+    "7segment",
+    "BCD_Binary_Convertion",
+    "ClockDivider",
+    "D",
+    "FSM",
+    "Full Subtractor",
+    "JK",
+    "SR",
+    "T",
+    "images"
+  ],
+  "path": "D:\\my\\Whiteboards\\study\\Hosted\\s1\\notesob\\Reconfigurable Architecture VLSI",
+  "last_updated": "1755516100.2675555"
+}

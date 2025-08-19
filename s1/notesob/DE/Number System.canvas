@@ -1,0 +1,20 @@
+{
+	"edges":[],
+	"metadata":{
+		"frontmatter":{},
+		"version":"1.0-1.0"
+	},
+	"nodes":[
+		{"file":"DE/Number System/Conversion.md","id":"181cddd8229c4719","type":"file","x":-320,"y":-340,"width":400,"height":400},
+		{"file":"DE/Number System/Minimum Possible Base.md","id":"fd9a217c61935f85","type":"file","x":-320,"y":140,"width":400,"height":400},
+		{"file":"DE/Number System/Basic.md","id":"3e9df88a330d60b5","type":"file","x":-740,"y":-340,"width":400,"height":400},
+		{"file":"DE/Number System/Add.md","id":"a228d337db436c92","type":"file","x":-740,"y":140,"width":400,"height":400},
+		{"file":"DE/Number System/Even Odd Number Check.md","id":"5b81d2465e6204ae","type":"file","x":100,"y":-340,"width":400,"height":400},
+		{"file":"DE/Number System/Negative Representation.md","id":"1dd2bc723fccf15d","type":"file","x":100,"y":140,"width":400,"height":400},
+		{"file":"DE/Number System/Q&Ans.md","id":"65d08d2c8a27c2e8","type":"file","x":520,"y":-340,"width":400,"height":400},
+		{"file":"DE/Number System/Subtraction.md","id":"15379b4a56a10bee","type":"file","x":520,"y":140,"width":400,"height":400},
+		{"file":"DE/Number System/Weight & Code.md","id":"8259ce547efd97f2","type":"file","x":940,"y":-340,"width":400,"height":400},
+		{"file":"DE/Number System/why add 6 in BCD.md","id":"ab207eca7afc4e3c","type":"file","x":940,"y":140,"width":400,"height":400},
+		{"file":"DE/Number System/code/self complementing.md","id":"8591f476599c4b67","type":"file","x":1360,"y":-340,"width":400,"height":400}
+	]
+}

@@ -1,0 +1,29 @@
+{
+  "files": [
+    ".gitattributes",
+    "CV.md",
+    "Gate.md",
+    "Index.md",
+    "UI.md",
+    "command.md",
+    "directory-listing.json",
+    "md.md",
+    "out.md",
+    "semiconductorJob.md",
+    "syntax-examples.md"
+  ],
+  "folders": [
+    ".obsidian",
+    ".trash",
+    "Chats",
+    "DE",
+    "EDC",
+    "Linux",
+    "ML",
+    "Python",
+    "Reconfigurable Architecture VLSI",
+    "Verilog"
+  ],
+  "path": "D:\\my\\Whiteboards\\study\\Hosted\\s1\\notesob",
+  "last_updated": "1755573618.3181872"
+}

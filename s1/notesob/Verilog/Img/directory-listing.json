@@ -1,0 +1,40 @@
+{
+  "files": [
+    "1Representation.png",
+    "2Representation.png",
+    "BlockVLSIDUTSynthesis.png",
+    "DUT.png",
+    "DigitalIDDedesignFlow.png",
+    "FPGA_CLB.png",
+    "FPGA_IO.png",
+    "FPGA_LUT.png",
+    "FPGA_Routing.png",
+    "FPGArc.png",
+    "FullCustomDesign.png",
+    "GateArray.png",
+    "RippleCarryAdderBlocksVLSI.png",
+    "Simpledesignflow.png",
+    "StandardCellEG.png",
+    "StandardCellLayout.png",
+    "StandardCellLayout1.png",
+    "Ydiagram.png",
+    "blocking.png",
+    "blockingeg.png",
+    "directory-listing.json",
+    "memory.png",
+    "nonBlocking.png",
+    "notblockingeg.png",
+    "tri0_truth_table.png",
+    "tri1_truth_table.png",
+    "verilog_array_schematic.png",
+    "verilog_arrays_register_schematic.png",
+    "wand_triand_truth_table.png",
+    "wire_tri_truth_table.png",
+    "wor_trior_truth_table.png"
+  ],
+  "folders": [
+    "Img"
+  ],
+  "path": "D:\\my\\Whiteboards\\study\\Hosted\\s1\\notesob\\Verilog\\Img",
+  "last_updated": "1755516102.4937756"
+}

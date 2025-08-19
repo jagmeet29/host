@@ -1,0 +1,3392 @@
+/* ========================================================================
+   COMPREHENSIVE STUDY MATERIALS CSS FRAMEWORK
+   ========================================================================
+   
+   This CSS file provides a complete styling framework for educational content
+   including themes, responsive design, typography, and interactive components.
+   
+   MAIN FEATURES:
+   - Dark/Light theme system with CSS custom properties
+   - Responsive design for mobile, tablet, and desktop
+   - File browser interface for navigation
+   - Mathematical expressions support (MathJax)
+   - Q&A callout system for interactive learning
+   - Code highlighting and syntax formatting
+   - Table styling for data presentation
+   - Modal interface for editing functionality
+   - Luxurious animations and smooth transitions
+   - Fluid responsive interactions
+   
+   STRUCTURE:
+   1. Universal Reset & Base Styles
+   2. CSS Variables & Theme System
+   3. Animation System & Keyframes
+   4. Typography & Layout
+   5. Component Styles (Tables, Code, Forms)
+   6. Interactive Elements (Buttons, Modals)
+   7. Responsive Design
+   8. Utility Classes
+   
+   ======================================================================== */
+
+/* ========================================================================
+   0. ANIMATION SYSTEM & LUXURIOUS EFFECTS
+   ======================================================================== */
+
+/* ====================================
+   KEYFRAME ANIMATIONS
+   ==================================== */
+
+/* Elegant fade-in with subtle scale */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Smooth slide-in from left */
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Luxurious glow pulse */
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(252, 169, 60, 0.3);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(252, 169, 60, 0.6);
+        transform: scale(1.02);
+    }
+}
+
+/* Elegant loading shimmer */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Smooth bounce effect */
+@keyframes elegantBounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px);
+    }
+    60% {
+        transform: translateY(-4px);
+    }
+}
+
+/* Floating animation for special elements */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Luxurious gradient animation */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ====================================
+   GLOBAL ANIMATION SETTINGS
+   ==================================== */
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced motion for all elements */
+*, *::before, *::after {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Luxurious easing for interactive elements */
+button, a, .file-btn, .folder-btn, .theme-toggle {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Special smooth transitions for theme changes */
+body, #content, #file-browser {
+    transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.3s ease;
+}
+
+/* ========================================================================
+   1. UNIVERSAL RESET & OVERFLOW CONTROL
+   ======================================================================== */
+
+/* 
+ * Universal box-sizing ensures consistent layout calculations
+ * by including padding and border in element's total width/height
+ */
+* {
+    box-sizing: border-box;
+}
+
+/* 
+ * Prevent horizontal scrolling at document level
+ * This stops content from breaking out of viewport bounds
+ */
+html {
+    overflow-x: hidden;
+}
+
+/* 
+ * Set maximum width constraints on root elements
+ * Prevents layout breaking on very wide screens
+ */
+html, body {
+    max-width: 100%;
+}
+
+/* 
+ * Responsive media elements
+ * Ensures images and embedded content never overflow their containers
+ * Maintains aspect ratio while scaling down
+ */
+img, video, iframe, embed, object {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 
+ * Code blocks with horizontal scrolling
+ * Allows long code lines to scroll rather than wrap
+ * Maintains code formatting integrity
+ */
+pre, code {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+/* ========================================================================
+   2. CSS VARIABLES & THEME SYSTEM
+   ======================================================================== */
+
+/* 
+ * ROOT VARIABLES - DARK THEME (DEFAULT)
+ * 
+ * Using CSS custom properties for a flexible theme system
+ * Benefits:
+ * - Easy theme switching via JavaScript
+ * - Consistent color usage across components
+ * - Maintainable and scalable color system
+ * - Performance benefits (no style recalculation)
+ */
+:root {
+    /* Base font size for rem calculations */
+    font-size: 16px;
+    
+    /* ====================================
+       CORE THEME COLORS (DARK)
+       ==================================== */
+    
+    /* Primary background and text colors */
+    --bg-color: rgb(0, 0, 0);           /* Main background */
+    --text-color: rgb(255, 255, 255);   /* Primary text */
+    --primary-color: rgb(252, 169, 60);  /* Brand/accent color */
+    --secondary-color: rgb(255, 205, 144); /* Secondary accent */
+    
+    /* ====================================
+       COMPONENT BACKGROUND COLORS
+       ==================================== */
+    
+    --code-bg: rgb(40, 40, 40);         /* Code block backgrounds */
+    --content-bg: rgb(40, 40, 40);      /* Content area backgrounds */
+    --browser-bg: rgb(30, 30, 30);      /* File browser background */
+    
+    /* ====================================
+       BORDER & OUTLINE COLORS
+       ==================================== */
+    
+    --border-color: rgb(60, 60, 60);    /* General borders */
+    
+    /* ====================================
+       INTERACTIVE ELEMENT COLORS
+       ==================================== */
+    
+    /* Button styling */
+    --button-bg: rgb(50, 50, 50);       /* Button background */
+    --button-border: rgb(80, 80, 80);   /* Button border */
+    --button-text: rgb(220, 220, 220);  /* Button text */
+    
+    /* ====================================
+       TABLE COMPONENT COLORS
+       ==================================== */
+    
+    --table-bg: rgb(25, 25, 25);        /* Table background */
+    --table-row-even: rgb(35, 35, 35);  /* Alternating row color */
+    --table-row-hover: rgb(45, 45, 45); /* Row hover state */
+    --table-border: rgb(60, 60, 60);    /* Table borders */
+    --table-cell-border: rgb(50, 50, 50); /* Cell borders */
+    
+    /* ====================================
+       CODE SYNTAX HIGHLIGHTING
+       ==================================== */
+    
+    --inline-code-bg: rgb(55, 55, 55);     /* Inline code background */
+    --inline-code-color: rgb(147, 197, 253); /* Inline code text */
+    --inline-code-border: rgb(75, 85, 99);   /* Inline code border */
+}
+
+/* ========================================================================
+   3. LIGHT THEME OVERRIDE VARIABLES
+   ======================================================================== */
+
+/* 
+ * LIGHT MODE THEME OVERRIDES
+ * 
+ * These variables override the dark theme defaults when [data-theme="light"]
+ * is applied to the document. This allows for seamless theme switching
+ * without duplicating component styles.
+ * 
+ * Theme switching is handled by JavaScript that toggles the data-theme attribute
+ */
+[data-theme="light"] {
+    /* ====================================
+       CORE THEME COLORS (LIGHT)
+       ==================================== */
+    
+    --bg-color: rgb(255, 255, 255);      /* Pure white background */
+    --text-color: rgb(45, 55, 72);       /* Dark gray for excellent readability */
+    --primary-color: rgb(252, 169, 60);  /* Keep the warm orange */
+    --secondary-color: rgb(255, 205, 144); /* Keep the warm secondary */
+    
+    /* ====================================
+       COMPONENT BACKGROUNDS (LIGHT)
+       ==================================== */
+    
+    --code-bg: rgb(248, 250, 252);       /* Very light gray for code */
+    --content-bg: rgb(255, 255, 255);    /* Pure white for content */
+    --browser-bg: rgb(250, 250, 250);    /* Very subtle gray for browser */
+    
+    /* ====================================
+       BORDERS & SEPARATORS (LIGHT)
+       ==================================== */
+    
+    --border-color: rgb(226, 232, 240);  /* Light gray borders */
+    
+    /* ====================================
+       INTERACTIVE ELEMENTS (LIGHT)
+       ==================================== */
+    
+    --button-bg: rgb(255, 255, 255);     /* White buttons */
+    --button-border: rgb(203, 213, 224); /* Light gray borders */
+    --button-text: rgb(45, 55, 72);      /* Dark text for contrast */
+    
+    /* ====================================
+       TABLE STYLING (LIGHT) - READING OPTIMIZED
+       ==================================== */
+    
+    --table-bg: rgb(255, 255, 255);      /* Pure white table background */
+    --table-row-even: rgb(252, 252, 252); /* Very subtle alternating rows */
+    --table-row-hover: rgb(254, 250, 240); /* Subtle warm hover */
+    --table-border: rgb(229, 229, 229);   /* Soft borders */
+    --table-cell-border: rgb(242, 242, 242); /* Very subtle cell separation */
+    
+    /* ====================================
+       CODE HIGHLIGHTING (LIGHT)
+       ==================================== */
+    
+    --inline-code-bg: rgb(248, 250, 252); /* Light gray code background */
+    --inline-code-color: rgb(45, 55, 72); /* Dark text for readability */
+    --inline-code-border: rgb(203, 213, 224); /* Subtle border */
+    
+    /* ====================================
+       Q&A CALLOUT COLORS (LIGHT)
+       ==================================== */
+    
+    /* Question styling - warm neutral theme */
+    --question-bg: rgb(254, 252, 232);      /* Light cream background */
+    --question-border: rgb(217, 119, 6);    /* Warm orange border */
+    --question-text: rgb(120, 53, 15);      /* Dark brown text */
+    
+    /* Answer styling - success green theme */
+    --answer-bg: rgb(240, 253, 244);        /* Light green background */
+    --answer-border: rgb(34, 197, 94);      /* Success green border */
+    --answer-text: rgb(22, 101, 52);        /* Deep green text */
+    
+    /* ====================================
+       GENERAL CALLOUT SYSTEM (LIGHT)
+       ==================================== */
+    
+    /* Note callouts - neutral theme */
+    --callout-note-bg: rgb(248, 250, 252);
+    --callout-note-border: rgb(100, 116, 139);
+    --callout-note-text: rgb(45, 55, 72);
+    
+    /* Warning callouts - amber theme */
+    --callout-warning-bg: rgb(255, 251, 235);
+    --callout-warning-border: rgb(245, 158, 11);
+    --callout-warning-text: rgb(146, 64, 14);
+    
+    /* Tip callouts - green theme */
+    --callout-tip-bg: rgb(240, 253, 244);
+    --callout-tip-border: rgb(34, 197, 94);
+    --callout-tip-text: rgb(22, 101, 52);
+    
+    /* Info callouts - neutral gray theme */
+    --callout-info-bg: rgb(248, 250, 252);
+    --callout-info-border: rgb(100, 116, 139);
+    --callout-info-text: rgb(45, 55, 72);
+    
+    /* Success callouts - green theme */
+    --callout-success-bg: rgb(240, 253, 244);
+    --callout-success-border: rgb(34, 197, 94);
+    --callout-success-text: rgb(22, 101, 52);
+    
+    /* Error callouts - red theme */
+    --callout-error-bg: rgb(254, 242, 242);
+    --callout-error-border: rgb(239, 68, 68);
+    --callout-error-text: rgb(153, 27, 27);
+    
+    /* Example callouts - purple theme */
+    --callout-example-bg: rgb(250, 245, 255);
+    --callout-example-border: rgb(168, 85, 247);
+    --callout-example-text: rgb(109, 40, 217);
+    
+    /* Important callouts - pink theme */
+    --callout-important-bg: rgb(255, 241, 242);
+    --callout-important-border: rgb(244, 63, 94);
+    --callout-important-text: rgb(190, 18, 60);
+}
+
+/* ========================================================================
+   4. THEME TOGGLE CONTROL
+   ======================================================================== */
+
+/* 
+ * THEME TOGGLE BUTTON
+ * 
+ * Floating action button for switching between light and dark themes
+ * Features:
+ * - Fixed positioning in top-right corner
+ * - Circular design with icon
+ * - Smooth hover animations only
+ * - High z-index to stay above all content
+ * - Responsive scaling for different screen sizes
+ */
+.theme-toggle {
+    /* ====================================
+       POSITIONING & LAYOUT
+       ==================================== */
+    position: fixed;
+    top: 1.25rem;                        /* 20px from top */
+    right: 1.25rem;                      /* 20px from right */
+    z-index: 1000;                       /* Above all other content */
+    
+    /* ====================================
+       VISUAL DESIGN
+       ==================================== */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    border-radius: 50%;                  /* Perfect circle */
+    width: 3.5rem;                       /* Enhanced size: 56px */
+    height: 3.5rem;                      /* Enhanced size: 56px */
+    font-size: 1.6rem;                   /* Larger icon */
+    
+    /* Clean visual effects */
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        0 2px 6px rgba(0, 0, 0, 0.1);
+    
+    /* ====================================
+       FLEXBOX CENTERING
+       ==================================== */
+    display: flex;
+    align-items: center;                 /* Vertical center */
+    justify-content: center;             /* Horizontal center */
+    
+    /* ====================================
+       INTERACTION & ANIMATION
+       ==================================== */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 
+ * ENHANCED HOVER EFFECTS
+ * Provides visual feedback when user hovers over the toggle button
+ */
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.2),
+        0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Active/clicked state */
+.theme-toggle:active {
+    transform: scale(1.05);
+    transition: transform 0.1s ease;
+}
+
+/* 
+ * LIGHT THEME SPECIFIC STYLING
+ * Adjusts button appearance for better contrast in light mode
+ */
+[data-theme="light"] .theme-toggle {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.1),
+        0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.15),
+        0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================================================
+   LIGHT THEME SPECIFIC ENHANCEMENTS
+   ======================================================================== */
+
+/* 
+ * Enhanced styling for better light mode appearance
+ * Provides better contrast and visual hierarchy in light theme
+ */
+
+/* Light theme table improvements - enhanced shadow and border */
+[data-theme="light"] table {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);   /* Subtle shadow for depth */
+    border: 1px solid var(--border-color);      /* Clean border definition */
+}
+
+/* Light theme file browser - professional appearance */
+[data-theme="light"] #file-browser {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-color);      /* Clear container boundaries */
+}
+
+/* ========================================================================
+   5. TYPOGRAPHY & HEADING HIERARCHY
+   ======================================================================== */
+
+/* 
+ * HEADING SYSTEM
+ * 
+ * Establishes a clear visual hierarchy for educational content
+ * Features:
+ * - Consistent sizing and spacing
+ * - Color coding for different heading levels
+ * - Responsive scaling for mobile devices
+ * - Hover effects for interactivity
+ * 
+ * Hierarchy:
+ * H1 - Main page titles (largest, primary color)
+ * H2 - Section headers (large, primary color)
+ * H3 - Subsection headers (medium, secondary color)
+ * H4 - Content headers (medium-large, primary color)
+ * H5 - Minor headers (medium, secondary color)
+ * H6 - Small headers (small-medium, secondary color)
+ */
+
+/* ====================================
+   BASE HEADING STYLES
+   ==================================== */
+h1, h2, h3, h4, h5, h6 {
+    /* Typography */
+    color: var(--text-color);
+    font-family: 'System-ui', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 500;                    /* Medium weight for readability */
+    line-height: 1.25;                   /* Tight line height for headings */
+    
+    /* Spacing */
+    margin-top: 1.5rem;                  /* Space above headings */
+    margin-bottom: 0.75rem;              /* Space below headings */
+    
+    /* Luxurious animations */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    animation: fadeInUp 0.8s ease-out both;
+}
+
+/* Staggered animation delays for headings */
+h1 { animation-delay: 0.1s; }
+h2 { animation-delay: 0.2s; }
+h3 { animation-delay: 0.3s; }
+h4 { animation-delay: 0.4s; }
+h5 { animation-delay: 0.5s; }
+h6 { animation-delay: 0.6s; }
+
+/* ====================================
+   SPECIFIC HEADING LEVELS
+   ==================================== */
+
+/* H1 - Primary page titles */
+h1 {
+    font-size: 2.5rem;                   /* Enhanced size: ~40px */
+    color: var(--primary-color);         /* Brand color for emphasis */
+    margin-bottom: 1.5rem;               /* Extra space below main titles */
+    
+    /* Luxurious gradient text effect */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    /* Enhanced effects */
+    text-shadow: 0 4px 8px rgba(252, 169, 60, 0.3);
+    position: relative;
+}
+
+/* Elegant underline effect for H1 */
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+    transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+h1:hover::after {
+    width: 100%;
+}
+
+/* H2 - Major section headers */
+h2 {
+    font-size: 2rem;                     /* ~32px - Clearly hierarchical */
+    color: var(--primary-color);         /* Consistent with H1 */
+    opacity: 0.95;                       /* Slightly subdued */
+    margin-bottom: 1rem;                 /* Consistent spacing */
+    padding-top: 0.5rem;                 /* Extra top padding */
+    
+    /* Subtle glow effect */
+    text-shadow: 0 2px 4px rgba(252, 169, 60, 0.2);
+    position: relative;
+}
+
+/* Animated accent for H2 */
+h2::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 0;
+    background: var(--primary-color);
+    border-radius: 2px;
+    transition: height 0.4s ease;
+}
+
+h2:hover::before {
+    height: 80%;
+}
+
+/* H3 - Subsection headers */
+h3 {
+    font-size: 1.4rem;                   /* ~22px - Medium prominence */
+    color: var(--secondary-color);       /* Secondary color for distinction */
+    line-height: 1.6rem;                 /* Slightly relaxed line height */
+    margin-top: 1.2rem;                  /* Clear separation from content */
+    margin-bottom: 0.4rem;               /* Tight coupling with following content */
+    
+    /* Subtle shimmer effect on hover */
+    position: relative;
+    overflow: hidden;
+}
+
+h3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 205, 144, 0.3), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+h3:hover::before {
+    left: 100%;
+}
+
+/* H4 - Content section headers */
+h4 {
+    font-size: 1.7rem;                   /* ~27px - Notable but not dominant */
+    color: var(--primary-color);         /* Primary color for importance */
+}
+
+/* H5 - Minor section headers */
+h5 {
+    font-size: 1.4rem;                   /* ~22px - Same as H3 but different color */
+    color: var(--secondary-color);       /* Secondary color hierarchy */
+}
+
+/* H6 - Smallest headers */
+h6 {
+    font-size: 1.25rem;                  /* ~20px - Just above body text */
+    font-weight: 500;                    /* Consistent weight */
+    color: var(--secondary-color);       /* Secondary color consistency */
+}
+
+/* ====================================
+   INTERACTIVE HEADING EFFECTS
+   ==================================== */
+
+/* 
+ * Subtle hover effects optimized for reading comfort
+ * Reduced animations to avoid distraction during reading
+ */
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+    color: var(--primary-color);
+    transition: color 0.3s ease;         /* Only color transitions */
+}
+
+/* Subtle effect for H1 - no transforms to avoid reading disruption */
+h1:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* H4, H5, H6 minimal effects */
+h4, h5, h6 {
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+h4:hover, h5:hover, h6:hover {
+    color: var(--primary-color);
+    /* Removed transform for reading comfort */
+}
+
+/* ========================================================================
+   6. HORIZONTAL RULES & DIVIDERS
+   ======================================================================== */
+
+/* 
+ * HORIZONTAL RULE SYSTEM
+ * 
+ * Provides visual separation between content sections
+ * Multiple styles available for different contexts:
+ * - Default: Prominent burlywood divider
+ * - Simple: Subtle single-line divider
+ * - Thick: Bold section separator
+ * - Dashed: Soft visual break
+ * - Dotted: Decorative separator
+ */
+
+/* ====================================
+   DEFAULT HORIZONTAL RULE
+   ==================================== */
+hr {
+    /* Remove default browser styling */
+    border: none;
+    
+    /* Visual design */
+    height: 3px;                         /* Noticeable thickness */
+    background: burlywood;               /* Warm, distinctive color */
+    border-radius: 2px;                  /* Softened edges */
+    
+    /* Spacing */
+    margin: 2rem 0;                      /* Generous vertical spacing */
+    
+    /* Interaction */
+    opacity: 0.8;                        /* Slightly subdued by default */
+    transition: opacity 0.3s ease;       /* Smooth hover transition */
+}
+
+/* Hover effect for interactivity */
+hr:hover {
+    opacity: 1;                          /* Full opacity on hover */
+}
+
+/* ====================================
+   ALTERNATIVE HORIZONTAL RULE STYLES
+   ==================================== */
+
+/* Simple horizontal rule - minimal separator */
+hr.simple {
+    background: var(--border-color);     /* Uses theme border color */
+    height: 1px;                         /* Thin, subtle line */
+    margin: 1.5rem 0;                    /* Reduced spacing */
+}
+
+/* Thick horizontal rule - strong separator */
+hr.thick {
+    height: 5px;                         /* Bold, prominent line */
+    background: var(--primary-color);    /* Brand color for emphasis */
+    margin: 2.5rem 0;                    /* Extra spacing for impact */
+}
+
+/* Dashed horizontal rule - soft visual break */
+hr.dashed {
+    border: none;                        /* Remove default */
+    border-top: 2px dashed var(--border-color); /* Dashed line */
+    height: 0;                           /* No background height */
+    margin: 2rem 0;                      /* Standard spacing */
+    background: none;                    /* Transparent background */
+}
+
+/* Dotted horizontal rule - decorative separator */
+hr.dotted {
+    border: none;                        /* Remove default */
+    border-top: 3px dotted var(--primary-color); /* Dotted line */
+    height: 0;                           /* No background height */
+    margin: 2rem 0;                      /* Standard spacing */
+    background: none;                    /* Transparent background */
+}
+
+/* ====================================
+   LIGHT THEME ADJUSTMENTS
+   ==================================== */
+
+/* Adjust default HR for light theme */
+[data-theme="light"] hr {
+    background: burlywood;               /* Maintain burlywood in light mode */
+    opacity: 0.7;                        /* Slightly more subdued */
+}
+
+[data-theme="light"] hr:hover {
+    opacity: 0.9;                        /* Less prominent hover effect */
+}
+
+/* Simple HR uses theme border color automatically */
+[data-theme="light"] hr.simple {
+    background: var(--border-color);     /* Automatically adjusts to light border */
+}
+
+/* Dashed HR uses theme border color automatically */
+[data-theme="light"] hr.dashed {
+    border-top-color: var(--border-color); /* Automatically adjusts to light border */
+}
+
+/* ========================================================================
+   EXTENDED LIGHT THEME ENHANCEMENTS
+   ======================================================================== */
+
+/* 
+ * Additional light theme specific improvements
+ * These override default styling for better light mode appearance
+ */
+
+/* ====================================
+   LIGHT THEME COMPONENT IMPROVEMENTS
+   ==================================== */
+
+/* Enhanced table styling for light mode */
+[data-theme="light"] table {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);   /* Subtle shadow for definition */
+    border: 1px solid var(--border-color);      /* Clear table boundaries */
+}
+
+/* Enhanced file browser for light mode */
+[data-theme="light"] #file-browser {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-color);      /* Professional container definition */
+}
+
+/* ====================================
+   LIGHT THEME BUTTON ENHANCEMENTS
+   ==================================== */
+
+/* Enhanced button styling for light mode */
+[data-theme="light"] .file-btn, 
+[data-theme="light"] .folder-btn {
+    background-color: var(--button-bg);         /* Clean white background */
+    border: 1px solid var(--button-border);     /* Subtle border definition */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* Very subtle depth */
+}
+
+/* Button hover effects for light mode */
+[data-theme="light"] .file-btn:hover, 
+[data-theme="light"] .folder-btn:hover {
+    background-color: var(--primary-color);     /* Brand color on hover */
+    border-color: var(--primary-color);         /* Matching border */
+    color: white;                               /* High contrast text */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Active button state for light mode */
+[data-theme="light"] .file-btn.active {
+    background-color: var(--primary-color);     /* Active state highlighting */
+    border-color: var(--primary-color);         /* Consistent border */
+    color: white;                               /* Clear contrast */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* ====================================
+   LIGHT THEME CODE BLOCKS
+   ==================================== */
+
+/* Enhanced code block styling for light mode */
+[data-theme="light"] pre > code, 
+[data-theme="light"] code:not(p code):not(h1 code):not(h2 code):not(h3 code):not(h4 code):not(h5 code):not(h6 code):not(li code):not(td code):not(th code) {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);  /* Gentle depth effect */
+    border: 1px solid var(--border-color);      /* Clear code boundaries */
+    background-color: var(--code-bg);           /* Theme-appropriate background */
+}
+
+/* ====================================
+   LIGHT THEME CONTENT AREAS
+   ==================================== */
+
+/* Enhanced content block styling for light mode */
+[data-theme="light"] content {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);  /* Subtle depth */
+    border: 1px solid var(--border-color);      /* Clean boundaries */
+    border-left: 4px solid var(--primary-color); /* Brand accent strip */
+}
+
+/* Enhanced file list styling for light mode */
+[data-theme="light"] #file-list {
+    background-color: var(--content-bg);        /* Theme background */
+    border: 1px solid var(--border-color);      /* Container definition */
+}
+
+/* ========================================================================
+   7. RESPONSIVE DESIGN SYSTEM
+   ======================================================================== */
+
+/* 
+ * MOBILE-FIRST RESPONSIVE DESIGN
+ * 
+ * This section handles responsive behavior across different screen sizes
+ * using a mobile-first approach with progressive enhancement.
+ * 
+ * Breakpoints:
+ * - Mobile: 320px - 480px (extra small)
+ * - Small Mobile: 480px - 768px (small)
+ * - Tablet: 768px - 900px (medium)
+ * - Desktop: 900px+ (large)
+ * 
+ * Key responsive features:
+ * - Fluid typography scaling
+ * - Flexible layout containers
+ * - Adaptive component sizing
+ * - Touch-friendly interaction areas
+ */
+
+/* ====================================
+   TABLET & SMALL DESKTOP (≤900px)
+   ==================================== */
+@media (max-width: 900px) {
+    /* --------------------------------
+       BASE LAYOUT ADJUSTMENTS
+       -------------------------------- */
+    
+    body {
+        font-size: 0.9rem;               /* Slightly smaller base font */
+        overflow-x: hidden;              /* Prevent horizontal scroll */
+    }
+    
+    /* Main content container */
+    #content {
+        margin: 0 auto;                  /* Center content */
+        padding: 0.3125rem 0.625rem;     /* Reduced padding */
+        max-width: 100%;                 /* Full width utilization */
+        width: 100% !important;          /* Override any fixed widths */
+        box-sizing: border-box;          /* Include padding in width */
+    }
+    
+    /* --------------------------------
+       COMPONENT RESPONSIVENESS
+       -------------------------------- */
+    
+    /* Ensure all major containers are responsive */
+    .table-wrapper,
+    .qa-container,
+    .modal-content,
+    .wiki-image-container {
+        max-width: 100%;                 /* Never exceed viewport */
+        width: 100%;                     /* Use full available width */
+        box-sizing: border-box;          /* Include padding/borders */
+    }
+    
+    /* --------------------------------
+       THEME TOGGLE ADJUSTMENTS
+       -------------------------------- */
+    
+    .theme-toggle {
+        top: 0.625rem;                   /* Closer to edge */
+        right: 0.625rem;                 /* Closer to edge */
+        width: 2.8125rem;                /* Slightly smaller */
+        height: 2.8125rem;               /* Maintain square ratio */
+        font-size: 1.3rem;               /* Proportional icon size */
+    }
+
+    /* --------------------------------
+       TYPOGRAPHY SCALING
+       -------------------------------- */
+    
+    /* Body text and general elements */
+    p, ul, ol, li, table {
+        font-size: 1.1rem;               /* Slightly larger for readability */
+        line-height: 1.7;                /* Maintain good readability */
+        box-sizing: border-box;
+    }
+    
+    /* Heading adjustments for tablet */
+    h2 {
+        font-size: 1.5rem;               /* Scaled down from 2rem */
+        margin-bottom: 0.8rem;           /* Tighter spacing */
+    }
+    
+    h3 {
+        font-size: 1.2rem;               /* Scaled down from 1.4rem */
+        line-height: 1.4rem;             /* Adjust line height */
+        margin-top: 1rem;                /* Reduced spacing */
+        margin-bottom: 0.3rem;           /* Tighter bottom margin */
+    }
+}
+
+/* ====================================
+   MOBILE PHONES (≤480px)
+   ==================================== */
+@media (max-width: 480px) {
+    /* --------------------------------
+       MOBILE LAYOUT OPTIMIZATIONS
+       -------------------------------- */
+    
+    body {
+        font-size: 0.85rem;              /* Smaller for mobile screens */
+        overflow-x: hidden;              /* Strict horizontal scroll prevention */
+    }
+    
+    /* Main content for mobile */
+    #content {
+        margin: 0 auto;                  /* Center content */
+        padding: 0.25rem 0.5rem;         /* Minimal padding for more content space */
+        max-width: 100%;                 /* Full viewport width */
+        width: 100%;                     /* No fixed constraints */
+        box-sizing: border-box;
+    }
+    
+    /* --------------------------------
+       FILE BROWSER MOBILE LAYOUT
+       -------------------------------- */
+    
+    #file-browser {
+        margin: 3.125rem 0.5rem 0.75rem 0.5rem; /* Account for theme toggle */
+        padding: 0.75rem;                /* Reduced padding */
+        width: calc(100% - 1rem);        /* Full width minus margins */
+        box-sizing: border-box;
+    }
+    
+    /* --------------------------------
+       CONTAINER RESPONSIVENESS
+       -------------------------------- */
+    
+    .table-wrapper,
+    .qa-container,
+    .modal-content,
+    .wiki-image-container {
+        max-width: 100%;                 /* Full width */
+        width: 100%;                     /* No constraints */
+    }
+    
+    /* --------------------------------
+       MOBILE TYPOGRAPHY
+       -------------------------------- */
+    
+    h2 {
+        font-size: 1.8rem;               /* Larger than tablet for impact */
+        margin-bottom: 0.6rem;           /* Tight spacing */
+    }
+    
+    h3 {
+        font-size: 1.3rem;               /* Slightly larger than tablet */
+        line-height: 1.3rem;             /* Tight line height */
+        margin-top: 0.8rem;              /* Reduced spacing */
+        margin-bottom: 0.2rem;           /* Very tight bottom margin */
+    }
+}
+
+/* ====================================
+   EXTRA SMALL SCREENS (≤320px)
+   ==================================== */
+@media (max-width: 320px) {
+    /* --------------------------------
+       ULTRA-COMPACT LAYOUT
+       -------------------------------- */
+    
+    /* Maximum space utilization */
+    #content {
+        margin: 0 auto;                  /* Center content */
+        padding: 0.125rem 0.25rem;       /* Minimal padding */
+        max-width: 100%;                 /* Full width */
+        width: 100%;                     /* No constraints */
+        box-sizing: border-box;
+    }
+    
+    /* File browser for very small screens */
+    #file-browser {
+        margin: 2.5rem 0.25rem 0.5rem 0.25rem; /* Minimal margins */
+        padding: 0.5rem;                 /* Reduced padding */
+        width: calc(100% - 0.5rem);      /* Maximum width utilization */
+        box-sizing: border-box;
+    }
+    
+    /* --------------------------------
+       CONTAINER OPTIMIZATION
+       -------------------------------- */
+    
+    .table-wrapper,
+    .qa-container,
+    .modal-content,
+    .wiki-image-container {
+        max-width: 100%;                 /* Full width */
+        width: 100%;                     /* No constraints */
+        margin-left: 0;                  /* Remove side margins */
+        margin-right: 0;                 /* Remove side margins */
+    }
+    
+    /* --------------------------------
+       EXTRA SMALL TYPOGRAPHY
+       -------------------------------- */
+    
+    body {
+        font-size: 0.8rem;               /* Smallest readable size */
+    }
+    
+    h1 {
+        font-size: 1.8rem;               /* Scaled down significantly */
+    }
+    
+    h2 {
+        font-size: 1.5rem;               /* Proportional scaling */
+    }
+    
+    h3 {
+        font-size: 1.1rem;               /* Compact but readable */
+    }
+    
+    /* --------------------------------
+       THEME TOGGLE FOR TINY SCREENS
+       -------------------------------- */
+    
+    .theme-toggle {
+        top: 0.5rem;                     /* Very close to edge */
+        right: 0.5rem;                   /* Very close to edge */
+        width: 2.5rem;                   /* Compact size */
+        height: 2.5rem;                  /* Maintain ratio */
+        font-size: 1.1rem;               /* Smaller icon */
+    }
+}
+
+
+/* ========================================================================
+   8. BASE LAYOUT & TYPOGRAPHY SYSTEM
+   ======================================================================== */
+
+/* 
+ * FUNDAMENTAL LAYOUT AND TEXT STYLING
+ * 
+ * This section establishes the foundation for all page content:
+ * - Base typography settings for optimal readability
+ * - Main content container sizing and positioning
+ * - Global text styling for consistency
+ * - Emphasis and formatting for enhanced content presentation
+ * 
+ * Design principles:
+ * - Mobile-first responsive approach
+ * - Accessible color contrast ratios
+ * - Comfortable reading experience
+ * - Consistent vertical rhythm
+ */
+
+/* ====================================
+   DOCUMENT BODY STYLING
+   ==================================== */
+body {
+    /* --------------------------------
+       VISUAL THEME
+       -------------------------------- */
+    background-color: var(--bg-color);   /* Theme-aware background */
+    color: var(--text-color);            /* Theme-aware text color */
+    
+    /* Subtle, reading-friendly gradient overlay */
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(252, 169, 60, 0.03) 0%, transparent 70%),
+        radial-gradient(circle at 80% 20%, rgba(255, 205, 144, 0.02) 0%, transparent 70%);
+    background-attachment: fixed;
+    
+    /* --------------------------------
+       READING-OPTIMIZED TYPOGRAPHY
+       -------------------------------- */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    font-size: 1.125rem;                 /* 18px - Optimal for reading */
+    line-height: 1.8;                    /* Increased line spacing for comfort */
+    font-weight: 400;                    /* Normal weight reduces eye strain */
+    
+    /* --------------------------------
+       LAYOUT FOUNDATION
+       -------------------------------- */
+    margin: 0;                           /* Remove default margins */
+    padding: 0;                          /* Remove default padding */
+    overflow-x: hidden;                  /* Prevent horizontal scrolling */
+    
+    /* --------------------------------
+       GENTLE TRANSITIONS
+       -------------------------------- */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    animation: fadeInUp 0.6s ease-out;   /* Reduced animation time */
+}
+
+/* Enhanced body for light theme - optimized for reading */
+[data-theme="light"] body {
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(252, 169, 60, 0.01) 0%, transparent 80%),
+        radial-gradient(circle at 80% 20%, rgba(255, 205, 144, 0.005) 0%, transparent 80%);
+}
+
+/* ====================================
+   MAIN CONTENT CONTAINER
+   ==================================== */
+#content {
+    /* Layout and positioning */
+    width: 60%;                          /* 60% of viewport on desktop */
+    max-width: 60rem;                    /* Maximum width constraint (960px) */
+    text-align: left;                    /* Left-aligned content */
+    margin: 0.625rem auto;               /* Centered with top margin */
+    padding: 2rem 1.5rem;                /* Enhanced padding for luxury feel */
+    
+    /* Enhanced dark mode visual separation */
+    background: var(--content-bg);
+    border-radius: 16px;                 /* Smooth rounded corners */
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.3),   /* Stronger shadow for dark mode */
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1); /* Subtle inner highlight */
+    border: 2px solid rgba(252, 169, 60, 0.2); /* Orange border with transparency */
+    
+    /* Smooth animations */
+    animation: fadeInUp 1s ease-out 0.2s both;
+    transition: all 0.3s ease;
+}
+
+/* Enhanced hover effect for content */
+#content:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.4),
+        0 6px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border-color: rgba(252, 169, 60, 0.4); /* Brighter border on hover */
+}
+
+/* Light theme content enhancements */
+[data-theme="light"] #content {
+    background: rgb(255, 255, 255);      /* Pure white */
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.06),
+        0 4px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-color); /* Thinner border for light mode */
+}
+
+[data-theme="light"] #content:hover {
+    box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.08),
+        0 6px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* ====================================
+   BASE TEXT ELEMENTS
+   ==================================== */
+
+/* 
+ * Reading-optimized sizing and spacing for all text elements
+ * Ensures comfortable reading experience for long sessions
+ */
+p, ul, ol, li, table {
+    font-size: 1.125rem;                 /* 18px - Optimal reading size */
+    line-height: 1.8;                    /* Generous spacing reduces eye strain */
+    box-sizing: border-box;              /* Include padding in size calculations */
+    
+    /* Gentle entrance animations */
+    animation: fadeInUp 0.4s ease-out 0.2s both;
+    transition: color 0.2s ease;         /* Only color transitions for reading comfort */
+}
+
+/* Enhanced paragraph styling for reading */
+p {
+    margin-bottom: 1.4rem;               /* Increased spacing between paragraphs */
+    position: relative;
+    max-width: 75ch;                     /* Optimal line length for reading */
+}
+
+/* Removed distracting hover effects for reading comfort */
+/* p:hover - removed transform and color changes */
+
+/* List enhancements for readability */
+ul, ol {
+    padding-left: 2rem;
+    margin-bottom: 1.4rem;               /* Consistent spacing */
+}
+
+li {
+    margin-bottom: 0.6rem;               /* Better spacing between items */
+    line-height: 1.7;                    /* Slightly tighter for lists */
+    max-width: 70ch;                     /* Prevent overly long lines */
+    transition: none;                    /* Remove distracting animations */
+}
+
+/* Removed distracting list hover effects */
+/* li:hover - removed for reading comfort */
+
+/* ====================================
+   PARAGRAPH STYLING
+   ==================================== */
+p {
+    margin: 0 0 0.8rem 0;                /* Bottom margin for vertical rhythm */
+}
+
+/* ====================================
+   TEXT EMPHASIS & FORMATTING
+   ==================================== */
+
+/* 
+ * Bold text styling - reduced weight for better readability
+ * Custom color for visual distinction while maintaining readability
+ */
+p strong, p b {
+    font-weight: 600;                    /* Semi-bold instead of full bold */
+    color: rgb(255, 0, 157);             /* Distinctive pink accent color */
+}
+
+/* ========================================================================
+   9. TABLE COMPONENT SYSTEM
+   ======================================================================== */
+
+/* 
+ * COMPREHENSIVE TABLE STYLING
+ * 
+ * Professional table design with enhanced readability and interaction
+ * Features:
+ * - Responsive horizontal scrolling wrapper
+ * - Zebra striping for row distinction
+ * - Hover effects for better user interaction
+ * - Theme-aware color system
+ * - Mobile-optimized sizing and spacing
+ * - Professional shadowing and borders
+ */
+
+/* ====================================
+   TABLE WRAPPER CONTAINER
+   ==================================== */
+
+/* 
+ * Responsive wrapper to handle table overflow
+ * Enables horizontal scrolling on smaller screens
+ * while maintaining table structure integrity
+ */
+.table-wrapper {
+    overflow-x: auto;                    /* Horizontal scrolling for wide tables */
+    overflow-y: visible;                 /* Allow vertical content to show */
+    max-width: 100%;                     /* Never exceed container width */
+    margin: 0.9375rem 0;                 /* Vertical spacing around tables */
+    border-radius: 0.625rem;             /* Rounded container corners */
+}
+
+/* ====================================
+   BASE TABLE STRUCTURE
+   ==================================== */
+table {
+    /* --------------------------------
+       LAYOUT PROPERTIES
+       -------------------------------- */
+    border-collapse: separate;           /* Allow for rounded corners */
+    border-spacing: 0;                   /* No gaps between cells */
+    border-radius: 12px;                 /* Moderate rounded corners */
+    width: auto;                         /* Natural sizing based on content */
+    min-width: fit-content;              /* Prevent shrinking below content needs */
+    display: table;                      /* Maintain proper table display */
+    
+    /* --------------------------------
+       READING-OPTIMIZED VISUAL STYLING
+       -------------------------------- */
+    background: var(--table-bg);         /* Clean theme background */
+    
+    /* Gentle, eye-friendly shadows */
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        0 2px 6px rgba(0, 0, 0, 0.05);
+    
+    overflow: hidden;                    /* Contain rounded corners */
+    white-space: nowrap;                 /* Prevent text wrapping in cells */
+    border: 1px solid var(--table-border);
+    
+    /* --------------------------------
+       GENTLE ANIMATIONS FOR READING COMFORT
+       -------------------------------- */
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+    transition: all 0.3s ease;
+}
+
+/* Subtle table hover effect - not distracting for readers */
+table:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+        0 6px 16px rgba(0, 0, 0, 0.1),
+        0 3px 8px rgba(0, 0, 0, 0.07);
+}
+
+/* ====================================
+   TABLE CELL FOUNDATION
+   ==================================== */
+
+/* Base styling for all table cells (headers and data) */
+th, td {
+    padding: 1rem 1.25rem;               /* Comfortable padding for reading */
+    text-align: left;                    /* Left-aligned content */
+    border-bottom: 1px solid var(--table-cell-border); /* Subtle row separation */
+    
+    /* Reading-optimized transitions */
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Gentle cell hover effects - non-distracting for reading */
+td:hover {
+    background-color: var(--table-row-hover);
+    /* Removed transform and shadows for reading comfort */
+}
+
+/* Row hover effects - subtle for long reading sessions */
+tr:hover td {
+    background-color: var(--table-row-hover);
+    /* Removed color change to maintain text readability */
+}
+
+/* Gentle row transitions */
+tr {
+    transition: background-color 0.2s ease;
+}
+
+/* ====================================
+   TABLE HEADER STYLING
+   ==================================== */
+th {
+    /* Reading-optimized header design */
+    background: var(--primary-color);    /* Solid color for better contrast */
+    color: white;                        /* High contrast text */
+    font-weight: 600;                    /* Strong but not overwhelming */
+    
+    /* Typography optimized for reading */
+    text-transform: uppercase;           /* Professional appearance */
+    letter-spacing: 0.025rem;            /* Reduced letter spacing for comfort */
+    font-size: 0.875rem;                 /* Smaller, less dominant headers */
+    
+    /* Clean visual effects */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    /* Gentle interactions */
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Subtle header hover effects */
+th:hover {
+    background: var(--secondary-color);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* ====================================
+   TABLE ROW INTERACTIONS
+   ==================================== */
+
+/* Zebra striping for row distinction */
+tr:nth-child(even) {
+    background-color: var(--table-row-even); /* Alternating row background */
+}
+
+/* Interactive hover effects */
+tr:hover {
+    background-color: var(--table-row-hover); /* Highlight on hover */
+    transition: background-color 0.2s ease;   /* Smooth color transition */
+}
+
+/* ====================================
+   TABLE CELL BORDERS
+   ==================================== */
+
+/* Vertical cell separation */
+td {
+    border-right: 1px solid var(--table-cell-border); /* Column separation */
+}
+
+/* Remove border from last column */
+td:last-child {
+    border-right: none;                  /* Clean right edge */
+}
+
+/* Remove border from last row */
+tr:last-child td {
+    border-bottom: none;                 /* Clean bottom edge */
+}
+
+/* ====================================
+   MOBILE TABLE RESPONSIVENESS
+   ==================================== */
+
+/* Tablet-sized screens */
+@media (max-width: 768px) {
+    .table-wrapper {
+        margin: 0.625rem 0;              /* Reduced margins */
+    }
+    
+    table {
+        font-size: 0.85rem;              /* Smaller base font */
+        border-radius: 0.375rem;         /* Smaller border radius */
+    }
+    
+    th, td {
+        padding: 0.5rem 0.625rem;        /* Reduced padding */
+        font-size: 0.8rem;               /* Smaller text */
+    }
+    
+    th {
+        font-size: 0.75rem;              /* Proportionally smaller headers */
+    }
+}
+
+/* Mobile phone screens */
+@media (max-width: 480px) {
+    .table-wrapper {
+        margin: 0.5rem 0;                /* Minimal margins */
+    }
+    
+    table {
+        font-size: 0.8rem;               /* Further size reduction */
+    }
+    
+    th, td {
+        padding: 0.375rem 0.5rem;        /* Compact padding */
+        font-size: 0.75rem;              /* Smaller text for space */
+    }
+    
+    th {
+        font-size: 0.7rem;               /* Proportional header sizing */
+        letter-spacing: 0.05rem;         /* Maintain readability */
+    }
+}
+
+
+/* ========================================================================
+   10. CODE SYNTAX HIGHLIGHTING SYSTEM
+   ======================================================================== */
+
+/* 
+ * COMPREHENSIVE CODE STYLING FRAMEWORK
+ * 
+ * Provides professional code presentation with:
+ * - Distinction between block and inline code
+ * - Monospace font stack for optimal readability
+ * - Syntax highlighting support
+ * - Responsive sizing and spacing
+ * - Theme-aware color schemes
+ * - Horizontal scrolling for long code lines
+ * 
+ * Code Types:
+ * - Block Code: Full-width code blocks (pre > code)
+ * - Inline Code: Small code snippets within text
+ * - Standalone Code: Code elements outside other containers
+ */
+
+/* ====================================
+   BLOCK CODE STYLING
+   ==================================== */
+
+/* 
+ * Comprehensive selector for block-level code
+ * Targets standalone code blocks and excludes inline code
+ */
+pre > code, 
+code:not(p code):not(h1 code):not(h2 code):not(h3 code):not(h4 code):not(h5 code):not(h6 code):not(li code):not(td code):not(th code) {
+    /* --------------------------------
+       LAYOUT & DIMENSIONS
+       -------------------------------- */
+    display: block;                      /* Full-width block display */
+    overflow: auto;                      /* Enable scrolling for long lines */
+    max-width: 100%;                     /* Respect container boundaries */
+    max-height: 25rem;                   /* Limit height with scrolling (400px) */
+    padding: 1rem;                       /* Generous padding for readability */
+    margin: 1rem 0;                      /* Vertical spacing around blocks */
+    box-sizing: border-box;              /* Include padding in size calculations */
+    
+    /* --------------------------------
+       TYPOGRAPHY & FONTS
+       -------------------------------- */
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+    font-size: 0.9rem;                   /* Slightly smaller than body text */
+    line-height: 1.5;                    /* Optimal line spacing for code */
+    white-space: pre;                    /* Preserve formatting and spacing */
+    
+    /* --------------------------------
+       VISUAL DESIGN
+       -------------------------------- */
+    background-color: var(--code-bg);    /* Theme-aware background */
+    border: 1px solid var(--border-color); /* Subtle border definition */
+    border-radius: 0.5rem;               /* Rounded corners for modern look */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Subtle depth */
+}
+
+/* ====================================
+   INLINE CODE STYLING
+   ==================================== */
+
+/* 
+ * Comprehensive selector for inline code elements
+ * Targets code within text content while excluding block code
+ */
+p code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code, li code, td code, th code,
+code:not(pre code) {
+    /* --------------------------------
+       LAYOUT & POSITIONING
+       -------------------------------- */
+    display: inline;                     /* Inline flow with text */
+    padding: 0.125rem 0.375rem;          /* Compact padding */
+    vertical-align: baseline;            /* Align with text baseline */
+    
+    /* --------------------------------
+       TYPOGRAPHY
+       -------------------------------- */
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+    font-size: 0.85rem;                  /* Slightly smaller than surrounding text */
+    font-weight: 500;                    /* Medium weight for emphasis */
+    line-height: 1.2;                    /* Tight line height for inline */
+    white-space: nowrap;                 /* Prevent breaking within code */
+    
+    /* --------------------------------
+       VISUAL DISTINCTION
+       -------------------------------- */
+    background-color: var(--inline-code-bg); /* Theme-aware background */
+    color: var(--inline-code-color);     /* Theme-aware text color */
+    border: 1px solid var(--inline-code-border); /* Subtle border */
+    border-radius: 0.25rem;              /* Small rounded corners */
+}
+
+/* ====================================
+   FALLBACK CODE STYLING
+   ==================================== */
+
+/* 
+ * Fallback font family for any code elements
+ * not caught by the specific selectors above
+ */
+code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+}
+
+/* ====================================
+   MOBILE CODE RESPONSIVENESS
+   ==================================== */
+
+/* Tablet and small desktop adjustments */
+@media (max-width: 768px) {
+    /* Block code adjustments */
+    pre > code, 
+    code:not(p code):not(h1 code):not(h2 code):not(h3 code):not(h4 code):not(h5 code):not(h6 code):not(li code):not(td code):not(th code) {
+        padding: 0.75rem;                /* Reduced padding */
+        font-size: 0.85rem;              /* Smaller font size */
+        margin: 0.75rem 0;               /* Reduced margins */
+        border-radius: 0.375rem;         /* Smaller border radius */
+        max-height: 18.75rem;            /* Reduced max height (300px) */
+    }
+    
+    /* Inline code adjustments */
+    p code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code, li code, td code, th code,
+    code:not(pre code) {
+        font-size: 0.8rem;               /* Smaller inline code */
+        padding: 0.0625rem 0.25rem;      /* Reduced padding */
+    }
+}
+
+/* Mobile phone adjustments */
+@media (max-width: 480px) {
+    /* Block code for mobile */
+    pre > code, 
+    code:not(p code):not(h1 code):not(h2 code):not(h3 code):not(h4 code):not(h5 code):not(h6 code):not(li code):not(td code):not(th code) {
+        padding: 0.625rem;               /* Further reduced padding */
+        font-size: 0.8rem;               /* Smaller font for mobile */
+        margin: 0.625rem 0;              /* Consistent margins */
+        max-height: 15.625rem;           /* Smaller max height (250px) */
+    }
+}
+
+/* ========================================================================
+   11. CONTENT ELEMENTS & MEDIA COMPONENTS
+   ======================================================================== */
+
+/* ====================================
+   CONTENT BLOCKS
+   ==================================== */
+
+/* Content blocks - highlighted information containers */
+content {
+    display: block;                      /* Block-level element */
+    margin: 0.9375rem 0;                 /* Vertical spacing */
+    padding: 0.625rem 0.9375rem;         /* Internal padding */
+    border-radius: 0.3125rem;            /* Rounded corners */
+    background-color: var(--content-bg); /* Theme background */
+    border-left: 0.25rem solid var(--primary-color); /* Accent border */
+}
+
+/* ====================================
+   LIST STYLING
+   ==================================== */
+
+/* Main lists - ordered and unordered */
+ul, ol {
+    margin: 1rem 0 1.5rem 0;             /* Top and bottom spacing */
+    padding-left: 2rem;                  /* Indent for bullets/numbers */
+}
+
+/* List items */
+li {
+    margin: 0.5rem 0;                    /* Spacing between items */
+}
+
+/* Nested lists - reduced margin for hierarchy */
+ul ul, ol ol, ul ol, ol ul {
+    margin: 0.5rem 0;                    /* Less spacing for nested lists */
+}
+
+/* ====================================
+   IMAGE STYLING
+   ==================================== */
+
+/* General image styling */
+img {
+    border-radius: 0.3125rem;            /* Rounded image corners */
+    margin: 0.625rem auto;               /* Center with vertical spacing */
+    display: block;                      /* Block display for centering */
+}
+
+/* ====================================
+   TOUCH-FRIENDLY ENHANCEMENTS
+   ==================================== */
+
+/* Touch device optimizations - larger tap targets */
+@media (hover: none) and (pointer: coarse) {
+    .file-btn, .folder-btn {
+        min-height: 3rem;                /* Larger touch targets */
+        padding: 0.75rem 1rem;           /* More padding for easier tapping */
+    }
+    
+    .theme-toggle {
+        width: 3rem;                     /* Larger toggle button */
+        height: 3rem;                    /* Square aspect ratio */
+        font-size: 1.4rem;               /* Bigger icon */
+    }
+    
+    .refresh-btn {
+        min-height: 2.5rem;              /* Adequate touch target */
+        padding: 0.5rem 0.75rem;         /* Comfortable padding */
+    }
+}
+
+/* ========================================================================
+   12. MATHJAX MATHEMATICAL EXPRESSIONS
+   ======================================================================== */
+
+/* 
+ * MATHEMATICAL CONTENT STYLING
+ * Ensures proper display of mathematical formulas and equations
+ */
+
+/* ====================================
+   BASE MATHJAX STYLING
+   ==================================== */
+
+/* Legacy MathJax components */
+.MathJax, .MathJax_Display, .MathJax_Preview {
+    font-size: 1rem !important;          /* Standard size for readability */
+    font-weight: 600 !important;         /* Semi-bold for emphasis */
+    overflow-x: auto !important;         /* Horizontal scroll for long equations */
+    overflow-y: hidden !important;       /* Prevent vertical scrolling */
+    max-width: 100% !important;          /* Respect container boundaries */
+}
+
+/* ====================================
+   MODERN MATHJAX CONTAINERS
+   ==================================== */
+
+/* General MathJax container */
+mjx-container {
+    font-size: 1rem !important;          /* Consistent sizing */
+    font-weight: 600 !important;         /* Enhanced visibility */
+    overflow-x: auto !important;         /* Handle wide equations */
+    overflow-y: hidden !important;       /* Vertical constraint */
+    max-width: 100% !important;          /* Container respect */
+}
+
+/* CHTML-specific MathJax styling */
+mjx-container[jax="CHTML"] {
+    font-size: 1rem !important;          /* Consistent with general styling */
+    font-weight: 600 !important;         /* Maintained emphasis */
+    overflow-x: auto !important;         /* Scrollable content */
+    overflow-y: hidden !important;       /* Vertical boundaries */
+    max-width: 100% !important;          /* Responsive sizing */
+}
+
+/* ====================================
+   DISPLAY MATH (BLOCK EQUATIONS)
+   ==================================== */
+
+/* Block-level mathematical expressions */
+mjx-container[display="true"] {
+    font-size: 1.125rem !important;      /* Larger for prominence */
+    font-weight: bold !important;        /* Strong emphasis */
+    overflow-x: auto !important;         /* Wide equation handling */
+    overflow-y: hidden !important;       /* Vertical constraint */
+    max-width: 100% !important;          /* Container boundaries */
+}
+
+/* All elements within display math */
+mjx-container[display="true"] * {
+    font-weight: bold !important;        /* Consistent bold styling */
+}
+
+/* ====================================
+   INLINE MATH
+   ==================================== */
+
+/* Inline mathematical expressions */
+mjx-container[display="false"] {
+    font-size: 1rem !important;          /* Match surrounding text */
+    font-weight: bold !important;        /* Visual distinction */
+    overflow-x: auto !important;         /* Handle overflow */
+    overflow-y: hidden !important;       /* Vertical constraint */
+    max-width: 100% !important;          /* Responsive boundaries */
+}
+
+/* ====================================
+   MATHJAX ELEMENT STYLING
+   ==================================== */
+
+/* Specific MathJax mathematical elements */
+mjx-math, mjx-mrow, mjx-mi, mjx-mo, mjx-mn {
+    font-weight: bold !important;        /* Emphasis for all math symbols */
+}
+
+/* ========================================================================
+   13. FILE BROWSER INTERFACE SYSTEM
+   ======================================================================== */
+
+/* 
+ * INTERACTIVE FILE NAVIGATION COMPONENT
+ * Provides file system browsing with professional styling
+ */
+
+/* ====================================
+   MAIN BROWSER CONTAINER
+   ==================================== */
+
+/* Primary file browser container */
+#file-browser {
+    background: var(--browser-bg);       /* Use theme background */
+    border: 1px solid var(--border-color);
+    border-radius: 16px;                 /* Rounded corners */
+    padding: 1.5rem;                     /* Enhanced internal spacing */
+    margin: 4.375rem auto 1.25rem auto;  /* Centered with top clearance */
+    width: 60%;                          /* Desktop width */
+    max-width: 60rem;                    /* Maximum constraint */
+    
+    /* Clean shadow system */
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.08),
+        0 4px 8px rgba(0, 0, 0, 0.04);
+    
+    /* Smooth entrance animation */
+    animation: slideInLeft 0.8s ease-out;
+    transition: all 0.3s ease;
+}
+
+/* Enhanced hover effect for file browser */
+#file-browser:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.1),
+        0 6px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Light theme file browser */
+[data-theme="light"] #file-browser {
+    background: rgb(255, 255, 255);      /* Pure white background */
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.06),
+        0 4px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="light"] #file-browser:hover {
+    box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.08),
+        0 6px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* ====================================
+   BROWSER HEADER SECTION
+   ==================================== */
+
+/* Header container with controls */
+.browser-header {
+    display: flex;                       /* Flexible layout */
+    justify-content: space-between;      /* Space between title and buttons */
+    align-items: center;                 /* Vertical alignment */
+    margin-bottom: 0.625rem;             /* Space below header */
+    border-bottom: 1px solid var(--border-color); /* Separator line */
+    padding-bottom: 0.5rem;              /* Internal bottom spacing */
+}
+
+/* Browser title */
+.browser-header h3 {
+    margin: 0;                           /* Remove default margins */
+    color: var(--primary-color);         /* Brand color for emphasis */
+}
+
+/* Button container */
+.header-buttons {
+    display: flex;                       /* Horizontal button layout */
+    gap: 0.5rem;                         /* Spacing between buttons */
+    align-items: center;                 /* Vertical alignment */
+}
+
+/* ====================================
+   HEADER ACTION BUTTONS
+   ==================================== */
+
+/* Base styling for action buttons */
+.refresh-btn, .clear-btn, .compact-btn {
+    background: var(--button-bg);        /* Use theme background */
+    border: 1px solid var(--button-border);
+    color: var(--button-text);
+    padding: 0.5rem 0.8rem;              /* Enhanced padding */
+    border-radius: 8px;                  /* Rounded corners */
+    cursor: pointer;
+    font-size: 0.9rem;
+    
+    /* Clean effects */
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.08),
+        0 1px 2px rgba(0, 0, 0, 0.04);
+    
+    /* Smooth animations */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shimmer effect overlay */
+.refresh-btn::before, .clear-btn::before, .compact-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+    transition: left 0.5s ease;
+}
+
+/* Refresh button hover effect */
+.refresh-btn:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 
+        0 8px 16px rgba(252, 169, 60, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.refresh-btn:hover::before {
+    left: 100%;
+}
+
+/* Clear button hover effect */
+.clear-btn:hover {
+    background: linear-gradient(135deg, var(--secondary-color), rgba(255, 205, 144, 0.8));
+    color: white;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 
+        0 8px 16px rgba(255, 205, 144, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.clear-btn:hover::before {
+    left: 100%;
+}
+
+/* Compact button hover effect */
+.compact-btn:hover {
+    background: linear-gradient(135deg, rgb(60, 130, 180), rgba(60, 130, 180, 0.8));
+    color: white;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 
+        0 8px 16px rgba(60, 130, 180, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.compact-btn:hover::before {
+    left: 100%;
+}
+
+/* ====================================
+   PATH INFORMATION DISPLAY
+   ==================================== */
+
+/* Current directory path display */
+#current-path {
+    font-size: 0.9rem;                   /* Smaller informational text */
+    color: var(--button-text);           /* Theme text color */
+    margin-bottom: 0.9375rem;            /* Space below path */
+    font-family: monospace;              /* Monospace for path clarity */
+}
+
+/* Current selected file display */
+#current-file {
+    font-size: 0.9rem;                   /* Consistent size with path */
+    color: var(--button-text);           /* Theme text color */
+    margin-top: 0.9375rem;               /* Space above file info */
+    padding-top: 0.5rem;                 /* Internal top padding */
+    border-top: 1px solid var(--border-color); /* Separator line */
+    font-family: monospace;              /* Monospace for file consistency */
+}
+
+/* ====================================
+   FILE LIST GRID SYSTEM
+   ==================================== */
+
+/* Main file listing container */
+#file-list {
+    display: grid;                       /* CSS Grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(8.75rem, 1fr)); /* Responsive columns */
+    gap: 0.625rem;                       /* Space between items */
+    max-height: 18.75rem;                /* Limit height with scrolling */
+    overflow-y: auto;                    /* Vertical scrolling */
+    padding: 0.5rem;                     /* Internal spacing */
+    border-radius: 0.5rem;               /* Rounded container */
+    background-color: var(--content-bg); /* Theme background */
+}
+
+/* ====================================
+   FILE & FOLDER BUTTON STYLING
+   ==================================== */
+
+/* Base styling for file and folder buttons */
+.file-btn, .folder-btn {
+    /* --------------------------------
+       LAYOUT PROPERTIES
+       -------------------------------- */
+    display: flex;                       /* Flexible layout */
+    align-items: center;                 /* Vertical centering */
+    justify-content: flex-start;         /* Left alignment */
+    min-height: 3rem;                    /* Enhanced touch target */
+    padding: 0.875rem 1.25rem;           /* Enhanced padding */
+    gap: 0.75rem;                        /* More space between icon and text */
+    
+    /* --------------------------------
+       TYPOGRAPHY
+       -------------------------------- */
+    font-size: 0.9rem;                   /* Slightly larger text */
+    font-weight: 500;                    /* Medium weight */
+    line-height: 1.3;                    /* Tight line spacing */
+    text-align: left;                    /* Left-aligned text */
+    
+    /* --------------------------------
+       TEXT WRAPPING
+       -------------------------------- */
+    white-space: normal;                 /* Allow text wrapping */
+    word-wrap: break-word;               /* Break long words */
+    word-break: break-word;              /* Force word breaking */
+    
+    /* --------------------------------
+       VISUAL STYLING & LUXURY EFFECTS
+       -------------------------------- */
+    background: var(--button-bg);        /* Use theme button background */
+    border: 1px solid var(--button-border);
+    color: var(--button-text);
+    border-radius: 12px;                 /* Rounded corners */
+    
+    /* Clean shadow system for better hover visibility */
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.05),
+        0 1px 2px rgba(0, 0, 0, 0.03);
+    
+    /* --------------------------------
+       INTERACTIONS & ANIMATIONS
+       -------------------------------- */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    
+    /* Entrance animation only on load */
+    animation: fadeInUp 0.6s ease-out both;
+}
+
+/* Enhanced entrance animation stagger */
+.file-btn:nth-child(1) { animation-delay: 0.1s; }
+.file-btn:nth-child(2) { animation-delay: 0.2s; }
+.file-btn:nth-child(3) { animation-delay: 0.3s; }
+.file-btn:nth-child(4) { animation-delay: 0.4s; }
+.file-btn:nth-child(5) { animation-delay: 0.5s; }
+
+/* Hover effect shimmer */
+.file-btn::before, .folder-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(252, 169, 60, 0.2), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+/* Enhanced hover effects */
+.file-btn:hover, .folder-btn:hover {
+    transform: translateY(-3px);
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 
+        0 8px 16px rgba(252, 169, 60, 0.25),
+        0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.file-btn:hover::before, .folder-btn:hover::before {
+    left: 100%;
+}
+
+/* Icon styling within buttons */
+.file-btn .icon, .folder-btn .icon {
+    flex-shrink: 0;                      /* Prevent icon shrinking */
+    font-size: 1.1rem;                   /* Slightly larger than text */
+}
+
+/* Text content within buttons */
+.file-btn .name, .folder-btn .name {
+    flex: 1;                             /* Take remaining space */
+    overflow-wrap: break-word;           /* Break long filenames */
+    hyphens: auto;                       /* Auto hyphenation */
+}
+
+/* ====================================
+   BUTTON INTERACTION EFFECTS
+   ==================================== */
+
+/* Hover effects for file and folder buttons */
+.file-btn:hover, .folder-btn:hover {
+    background-color: var(--primary-color); /* Brand color on hover */
+    color: white;                        /* High contrast text */
+    border-color: var(--primary-color);  /* Matching border */
+    transform: translateY(-0.0625rem);   /* Subtle lift effect */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+}
+
+/* Active/selected file button state */
+.file-btn.active {
+    background-color: var(--primary-color); /* Brand color for selection */
+    color: white;                        /* Clear contrast */
+    border-color: var(--primary-color);  /* Consistent border */
+    font-weight: bold;                   /* Emphasize selection */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15); /* Stronger shadow */
+}
+
+/* ====================================
+   SPECIAL BUTTON TYPES
+   ==================================== */
+
+/* Folder button distinctive styling */
+.folder-btn {
+    background-color: rgb(40, 60, 90);   /* Blue-tinted background */
+    border-color: rgb(60, 80, 110);      /* Matching border */
+}
+
+/* Folder button hover effect */
+.folder-btn:hover {
+    background-color: rgb(50, 70, 100);  /* Lighter blue on hover */
+}
+
+/* Back/parent directory button */
+.back-btn {
+    background-color: rgb(80, 50, 40) ; /* Brown-tinted background */
+    border-color: rgb(100, 70, 60) ;    /* Matching border */
+}
+
+/* Back button hover effect */
+.back-btn:hover {
+    background-color: rgb(90, 60, 50) !important; /* Lighter brown on hover */
+}
+
+/* ====================================
+   COMPACT VIEW STYLING
+   ==================================== */
+
+/* Compact layout for file/folder buttons */
+#file-list.compact-view .file-btn,
+#file-list.compact-view .folder-btn {
+    padding: 0.5rem 0.75rem;             /* Reduced padding */
+    min-height: 2.25rem;                 /* Smaller height */
+    font-size: 0.8rem;                   /* Smaller text */
+    white-space: nowrap;                 /* Prevent text wrapping */
+    overflow: hidden;                    /* Hide overflow */
+    text-overflow: ellipsis;             /* Show ellipsis for long names */
+}
+
+/* Compact view text handling */
+#file-list.compact-view .file-btn .name,
+#file-list.compact-view .folder-btn .name {
+    overflow: hidden;                    /* Hide overflow text */
+    text-overflow: ellipsis;             /* Ellipsis for truncation */
+    white-space: nowrap;                 /* Single line text */
+}
+
+/* ====================================
+   FILE BROWSER STATE INDICATORS
+   ==================================== */
+
+/* Loading, error, and empty state styling */
+.loading, .error, .empty {
+    text-align: center;                  /* Center-aligned messages */
+    padding: 2rem;                       /* Enhanced padding */
+    font-style: italic;                  /* Italic for emphasis */
+    border-radius: 15px;                 /* Rounded corners */
+    margin: 1rem 0;                      /* Vertical spacing */
+    backdrop-filter: blur(10px);         /* Glass effect */
+    transition: all 0.3s ease;
+}
+
+/* Luxurious loading state */
+.loading {
+    background: linear-gradient(135deg, 
+        rgba(252, 169, 60, 0.1), 
+        rgba(255, 205, 144, 0.05));
+    color: var(--primary-color);
+    border: 1px solid rgba(252, 169, 60, 0.3);
+    box-shadow: 
+        0 8px 16px rgba(252, 169, 60, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Error state specific styling */
+.error {
+    background: linear-gradient(135deg, 
+        rgba(255, 100, 100, 0.1), 
+        rgba(255, 150, 150, 0.05));
+    color: rgb(255, 120, 120);
+    border: 1px solid rgba(255, 100, 100, 0.3);
+    box-shadow: 
+        0 8px 16px rgba(255, 100, 100, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Empty state styling */
+.empty {
+    background: linear-gradient(135deg, 
+        rgba(150, 150, 150, 0.1), 
+        rgba(180, 180, 180, 0.05));
+    color: rgb(150, 150, 150);
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    box-shadow: 
+        0 8px 16px rgba(150, 150, 150, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* ====================================
+   MINIMAL SCROLLBAR STYLING
+   ==================================== */
+
+/* Minimal scrollbar width for file list */
+#file-list::-webkit-scrollbar {
+    width: 0.375rem;                     /* Thin and subtle */
+}
+
+/* Subtle scrollbar track (background) */
+#file-list::-webkit-scrollbar-track {
+    background: transparent;             /* Invisible track */
+}
+
+/* Minimal scrollbar thumb (draggable part) */
+#file-list::-webkit-scrollbar-thumb {
+    background: rgba(252, 169, 60, 0.3); /* Subtle orange */
+    border-radius: 0.25rem;              /* Small rounded corners */
+    transition: background 0.2s ease;    /* Quick fade transition */
+}
+
+/* Gentle hover effect */
+#file-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(252, 169, 60, 0.6); /* Slightly more visible on hover */
+}
+
+/* Minimal scrollbar for main content and all elements */
+*::-webkit-scrollbar {
+    width: 0.25rem;                      /* Very thin */
+    height: 0.25rem;                     /* For horizontal scrollbars */
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;             /* Invisible track */
+}
+
+*::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2); /* Subtle white/gray */
+    border-radius: 0.125rem;             /* Minimal rounding */
+    transition: background 0.2s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: rgba(252, 169, 60, 0.4); /* Theme color on hover */
+}
+
+/* Invisible corner styling */
+*::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* ====================================
+   MOBILE FILE BROWSER RESPONSIVENESS
+   ==================================== */
+
+/* Tablet and small desktop adjustments */
+@media (max-width: 900px) {
+    #file-browser {
+        margin: 3.75rem 0.625rem 0.9375rem 0.625rem; /* Adjusted margins */
+        padding: 0.9375rem;              /* Reduced padding */
+        border-radius: 0.5rem;           /* Smaller border radius */
+        max-width: none;                 /* Remove width constraint */
+        width: calc(100% - 1.25rem);     /* Full width minus margins */
+        box-sizing: border-box;          /* Include padding in width */
+    }
+    
+    /* File list grid adjustments */
+    #file-list {
+        grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); /* Smaller columns */
+        gap: 0.5rem;                     /* Reduced gap */
+        max-height: 15.625rem;           /* Shorter max height */
+        padding: 0.375rem;               /* Less padding */
+    }
+    
+    /* Button size adjustments */
+    .file-btn, .folder-btn {
+        padding: 0.625rem 0.75rem;       /* Reduced padding */
+        font-size: 0.8rem;               /* Smaller text */
+        min-height: 2.5rem;              /* Smaller height */
+        gap: 0.375rem;                   /* Less gap between elements */
+    }
+    
+    /* Header button spacing */
+    .header-buttons {
+        gap: 0.375rem;                   /* Reduced gap between buttons */
+    }
+    
+    /* Action button sizing */
+    .refresh-btn, .clear-btn, .compact-btn {
+        padding: 0.3125rem 0.5rem;       /* Smaller padding */
+        font-size: 0.8rem;               /* Smaller text */
+    }
+}
+
+/* Mobile phone adjustments */
+@media (max-width: 480px) {
+    /* Further grid adjustments for mobile */
+    #file-list {
+        grid-template-columns: repeat(auto-fill, minmax(6.25rem, 1fr)); /* Even smaller columns */
+        gap: 0.375rem;                   /* Minimal gap */
+        max-height: 12.5rem;             /* Compact height */
+    }
+    
+    /* Compact button styling for mobile */
+    .file-btn, .folder-btn {
+        padding: 0.5rem 0.625rem;        /* Minimal padding */
+        font-size: 0.75rem;              /* Small text */
+        min-height: 2.25rem;             /* Compact height */
+        gap: 0.3125rem;                  /* Minimal gap */
+    }
+    
+    /* Minimal header button spacing */
+    .header-buttons {
+        gap: 0.25rem;                    /* Very small gap */
+    }
+    
+    /* Compact action buttons */
+    .refresh-btn, .clear-btn, .compact-btn {
+        padding: 0.25rem 0.375rem;       /* Minimal padding */
+        font-size: 0.75rem;              /* Small text */
+    }
+}
+
+/* ========================================================================
+   14. WIKI LINKS & IMAGE STYLING SYSTEM
+   ======================================================================== */
+
+/* 
+ * ENHANCED LINK AND IMAGE PRESENTATION
+ * Provides sophisticated styling for wiki-style links and responsive images
+ */
+
+/* ====================================
+   WIKI LINK STYLING
+   ==================================== */
+
+/* Interactive wiki-style links */
+.wiki-link {
+    color: var(--primary-color);         /* Brand color for recognition */
+    text-decoration: none;               /* Remove default underline */
+    border-bottom: 1px dashed var(--primary-color); /* Dashed underline */
+    transition: all 0.2s ease;           /* Smooth hover transitions */
+    font-weight: 500;                    /* Medium weight for emphasis */
+}
+
+/* Wiki link hover effects */
+.wiki-link:hover {
+    color: var(--secondary-color);       /* Secondary color on hover */
+    border-bottom-color: var(--secondary-color); /* Matching border */
+    background-color: rgba(252, 169, 60, 0.1); /* Subtle background highlight */
+    padding: 0.125rem 0.25rem;           /* Padding for highlight area */
+    border-radius: 0.25rem;              /* Rounded highlight */
+}
+
+/* ====================================
+   WIKI IMAGE CONTAINERS
+   ==================================== */
+
+/* Image container with centering */
+.wiki-image {
+    margin: 1rem 0;                      /* Vertical spacing */
+    text-align: center;                  /* Center alignment */
+}
+
+/* Responsive image styling */
+.wiki-image img {
+    max-width: 100%;                     /* Responsive width */
+    height: auto;                        /* Maintain aspect ratio */
+    border-radius: 0.5rem;               /* Rounded corners */
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15); /* Depth shadow */
+    transition: transform 0.2s ease;     /* Smooth hover animation */
+}
+
+/* Image hover effect */
+.wiki-image img:hover {
+    transform: scale(1.02);               /* Slight zoom effect */
+    box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
+/* ====================================
+   LIGHT THEME IMAGE ADJUSTMENTS
+   ==================================== */
+
+/* Light theme image shadow adjustments */
+[data-theme="light"] .wiki-image img {
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1); /* Lighter shadow */
+}
+
+/* Light theme image hover effect */
+[data-theme="light"] .wiki-image img:hover {
+    box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.15); /* Subtle enhancement */
+}
+
+/* ====================================
+   IMAGE ERROR STATES
+   ==================================== */
+
+/* Styling for broken/error images */
+.image-error {
+    background-color: var(--content-bg);  /* Theme background */
+    border: 1px dashed var(--border-color) !important; /* Dashed error border */
+    border-radius: 0.5rem;               /* Rounded error container */
+    margin: 0.5rem 0;                    /* Vertical spacing */
+    font-size: 0.9rem;                   /* Readable error text */
+}
+
+/* ====================================
+   MOBILE IMAGE RESPONSIVENESS
+   ==================================== */
+
+/* Tablet and mobile image adjustments */
+@media (max-width: 768px) {
+    .wiki-image {
+        margin: 0.75rem 0;               /* Reduced spacing for mobile */
+    }
+    
+    .wiki-image img {
+        border-radius: 0.375rem;         /* Smaller border radius */
+    }
+}
+
+/* ========================================================================
+   15. EDIT FUNCTIONALITY & MODAL INTERFACE
+   ======================================================================== */
+
+/* 
+ * COMPREHENSIVE MODAL EDITING SYSTEM
+ * Provides full-screen file editing capabilities with professional styling
+ */
+
+/* ====================================
+   EDIT BUTTON STYLING
+   ==================================== */
+
+/* Inline edit button for content */
+.edit-btn {
+    background-color: rgb(70, 130, 180);  /* Blue background */
+    border: 1px solid rgb(90, 150, 200);  /* Matching border */
+    color: white;                        /* High contrast text */
+    padding: 0.25rem 0.5rem;             /* Compact padding */
+    border-radius: 0.25rem;              /* Rounded corners */
+    cursor: pointer;                     /* Pointer cursor */
+    font-size: 0.8rem;                   /* Small text size */
+    margin-left: 0.625rem;               /* Space from content */
+    transition: all 0.2s ease;           /* Smooth transitions */
+}
+
+/* Edit button hover effect */
+.edit-btn:hover {
+    background-color: rgb(90, 150, 200);  /* Lighter blue on hover */
+    transform: translateY(-0.0625rem);    /* Subtle lift effect */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2); /* Shadow depth */
+}
+
+/* ====================================
+   MODAL OVERLAY SYSTEM
+   ==================================== */
+
+/* Full-screen modal overlay */
+.modal {
+    position: fixed;                     /* Fixed positioning */
+    top: 0;                              /* Full height start */
+    left: 0;                             /* Full width start */
+    width: 100%;                         /* Full viewport width */
+    height: 100%;                        /* Full viewport height */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent backdrop */
+    display: flex;                       /* Flexbox for centering */
+    justify-content: center;             /* Horizontal centering */
+    align-items: center;                 /* Vertical centering */
+    z-index: 2000;                       /* High z-index for overlay */
+}
+
+/* ====================================
+   MODAL CONTENT CONTAINER
+   ==================================== */
+
+/* Main modal content box */
+.modal-content {
+    background-color: var(--content-bg); /* Theme background */
+    border: 2px solid var(--border-color); /* Theme border */
+    border-radius: 12px;                 /* Rounded corners */
+    width: 90%;                          /* Responsive width */
+    max-width: 900px;                    /* Maximum width constraint */
+    height: 80%;                         /* Most of viewport height */
+    display: flex;                       /* Flexbox layout */
+    flex-direction: column;              /* Vertical stacking */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Professional shadow */
+}
+
+/* ====================================
+   MODAL HEADER SECTION
+   ==================================== */
+
+/* Modal header with title and controls */
+.modal-header {
+    display: flex;                       /* Flexbox layout */
+    justify-content: space-between;      /* Space between elements */
+    align-items: center;                 /* Vertical alignment */
+    padding: 16px 20px;                  /* Generous padding */
+    border-bottom: 1px solid var(--border-color); /* Separator line */
+    background-color: var(--browser-bg); /* Theme header background */
+    border-radius: 10px 10px 0 0;        /* Rounded top corners */
+}
+
+/* Modal title styling */
+.modal-header h3 {
+    margin: 0;                           /* Remove default margins */
+    color: var(--primary-color);         /* Brand color for title */
+}
+
+/* ====================================
+   MODAL BUTTON CONTAINER
+   ==================================== */
+
+/* Button container in modal header */
+/* Button container in modal header */
+.modal-buttons {
+    display: flex;                       /* Horizontal button layout */
+    gap: 10px;                           /* Space between buttons */
+}
+
+/* ====================================
+   MODAL ACTION BUTTONS
+   ==================================== */
+
+/* Base styling for modal action buttons */
+.save-btn, .cancel-btn {
+    padding: 8px 16px;                   /* Comfortable padding */
+    border-radius: 6px;                  /* Rounded corners */
+    cursor: pointer;                     /* Pointer cursor */
+    font-size: 0.9em;                    /* Readable font size */
+    font-weight: 500;                    /* Medium weight */
+    transition: all 0.2s ease;           /* Smooth interactions */
+    border: 1px solid;                   /* Border for definition */
+}
+
+/* Save button styling */
+.save-btn {
+    background-color: rgb(34, 197, 94);  /* Green success color */
+    border-color: rgb(34, 197, 94);      /* Matching border */
+    color: white;                        /* High contrast text */
+}
+
+/* Save button hover effect */
+.save-btn:hover {
+    background-color: rgb(22, 163, 74);  /* Darker green on hover */
+    transform: translateY(-1px);         /* Lift effect */
+    box-shadow: 0 4px 8px rgba(34, 197, 94, 0.3); /* Green glow shadow */
+}
+
+/* Cancel button styling */
+.cancel-btn {
+    background-color: rgb(239, 68, 68);  /* Red danger color */
+    border-color: rgb(239, 68, 68);      /* Matching border */
+    color: white;                        /* High contrast text */
+}
+
+/* Cancel button hover effect */
+.cancel-btn:hover {
+    background-color: rgb(220, 38, 38);  /* Darker red on hover */
+    transform: translateY(-1px);         /* Lift effect */
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3); /* Red glow shadow */
+}
+
+/* ====================================
+   FILE EDITOR TEXTAREA
+   ==================================== */
+
+/* Main file editing area */
+#file-editor {
+    flex: 1;                             /* Take remaining space */
+    margin: 0;                           /* No external margins */
+    padding: 20px;                       /* Generous internal padding */
+    border: none;                        /* No border by default */
+    outline: none;                       /* Remove focus outline */
+    background-color: var(--code-bg);    /* Theme code background */
+    color: var(--text-color);            /* Theme text color */
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; /* Monospace fonts */
+    font-size: 14px;                     /* Readable code size */
+    line-height: 1.5;                    /* Comfortable line spacing */
+    resize: none;                        /* Disable manual resize */
+    border-radius: 0 0 10px 10px;        /* Rounded bottom corners */
+}
+
+/* Placeholder text styling */
+#file-editor::placeholder {
+    color: var(--button-text);           /* Theme placeholder color */
+    opacity: 0.7;                        /* Subtle appearance */
+}
+
+/* ====================================
+   LIGHT THEME MODAL ADJUSTMENTS
+   ==================================== */
+
+/* Light theme modal shadow adjustment */
+[data-theme="light"] .modal-content {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Lighter shadow */
+}
+
+/* Light theme editor border */
+[data-theme="light"] #file-editor {
+    border: 1px solid var(--border-color); /* Add border in light mode */
+}
+
+/* ====================================
+   MOBILE MODAL RESPONSIVENESS
+   ==================================== */
+
+/* Mobile modal adjustments */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;                      /* Nearly full width */
+        height: 90%;                     /* Nearly full height */
+    }
+    
+    /* Mobile header layout */
+    .modal-header {
+        padding: 12px 16px;              /* Reduced padding */
+        flex-direction: column;          /* Stack vertically */
+        gap: 10px;                       /* Space between elements */
+        align-items: stretch;            /* Full width alignment */
+    }
+    
+    /* Center buttons on mobile */
+    .modal-buttons {
+        justify-content: center;         /* Center button alignment */
+    }
+    
+    /* Larger touch targets for mobile */
+    .save-btn, .cancel-btn {
+        padding: 10px 20px;              /* More padding for touch */
+    }
+    
+    /* Mobile editor adjustments */
+    #file-editor {
+        padding: 15px;                   /* Reduced padding */
+        font-size: 13px;                 /* Smaller font for mobile */
+    }
+}
+
+/* ========================================================================
+   16. Q&A CALLOUT SYSTEM - MINIMAL DESIGN
+   ======================================================================== */
+
+/* 
+ * INTERACTIVE QUESTION & ANSWER COMPONENTS
+ * Clean, minimal design for educational Q&A content with collapsible answers
+ */
+
+/* ====================================
+   Q&A CONTAINER BASE
+   ==================================== */
+
+/* Main container for Q&A pairs */
+.qa-container {
+    margin: 16px 0;                      /* Vertical spacing */
+    border-radius: 4px;                  /* Subtle rounded corners */
+    overflow: hidden;                    /* Clean edges */
+    transition: border-color 0.2s ease;  /* Smooth border transitions */
+}
+
+/* ====================================
+   QUESTION CALLOUT DESIGN
+   ==================================== */
+
+/* Question callout container */
+.question-callout {
+    background: var(--question-bg);      /* Theme question background */
+    border: 1px solid var(--question-border); /* Theme border */
+    border-radius: 4px;                  /* Subtle rounding */
+    margin: 0;                           /* No external margins */
+    overflow: hidden;                    /* Clean container */
+}
+
+/* Question header styling */
+.question-header {
+    color: var(--question-header-text);  /* Theme header text color */
+    padding: 10px 14px;                  /* Comfortable padding */
+    font-weight: 500;                    /* Medium weight for emphasis */
+    font-size: 0.9em;                    /* Slightly smaller than body */
+    display: flex;                       /* Flexible layout */
+    align-items: center;                 /* Vertical alignment */
+    gap: 8px;                            /* Space between elements */
+    border-bottom: 1px solid var(--question-border); /* Separator line */
+}
+
+/* Question content area */
+.question-content {
+    padding: 14px;                       /* Generous content padding */
+    color: var(--question-text);         /* Theme text color */
+    font-weight: 400;                    /* Normal weight for readability */
+    font-size: 1em;                      /* Standard size */
+    line-height: 1.6;                    /* Comfortable reading */
+    background: var(--question-content-bg); /* Theme content background */
+}
+
+/* ====================================
+   ANSWER CALLOUT DESIGN
+   ==================================== */
+
+/* Answer callout container */
+.answer-callout {
+    background: var(--answer-bg);        /* Theme answer background */
+    border: 1px solid var(--answer-border); /* Theme border */
+    border-radius: 4px;                  /* Subtle rounding */
+    margin: 12px 0;                      /* Vertical spacing */
+    overflow: hidden;                    /* Clean container */
+}
+
+/* Clickable answer header */
+.answer-header {
+    color: var(--answer-header-text);    /* Theme header text */
+    padding: 10px 14px;                  /* Comfortable padding */
+    font-weight: 500;                    /* Medium weight */
+    font-size: 0.9em;                    /* Consistent with question */
+    display: flex;                       /* Flexible layout */
+    align-items: center;                 /* Vertical alignment */
+    gap: 8px;                            /* Element spacing */
+    cursor: pointer;                     /* Indicates interactivity */
+    transition: background-color 0.5s ease; /* Smooth hover effects */
+    border-bottom: 1px solid var(--answer-border); /* Separator line */
+}
+
+/* Collapse/expand indicator arrow */
+.answer-header::after {
+    content: "▼";                        /* Down arrow character */
+    margin-left: auto;                   /* Push to right side */
+    font-size: 0.8em;                    /* Smaller than text */
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Fast smooth rotation */
+    opacity: 0.7;                        /* Subtle appearance */
+}
+
+/* Expanded state arrow rotation */
+.answer-content.expanded + .answer-header::after,
+.answer-header.expanded::after {
+    transform: rotate(180deg);           /* Flip arrow to indicate expansion */
+}
+
+/* ====================================
+   ANSWER CONTENT AREA
+   ==================================== */
+
+/* Hidden by default answer content */
+.answer-content {
+    padding: 0 14px;                     /* Horizontal padding only */
+    color: var(--answer-text);           /* Theme answer text color */
+    background: var(--answer-content-bg); /* Theme content background */
+    font-size: 0.95em;                   /* Slightly smaller text */
+    line-height: 1.6;                    /* Comfortable reading */
+    max-height: 0;                       /* Collapsed state */
+    overflow: hidden;                    /* Hide overflow content */
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                padding 0.25s ease-out, 
+                opacity 0.2s ease-out; /* Optimized for smoothness without lag */
+    opacity: 0;                          /* Start invisible for smooth fade */
+    will-change: max-height, padding, opacity; /* Optimize for GPU acceleration */
+}
+
+/* Visible state when expanded */
+.answer-content.expanded {
+    max-height: 800px;                   /* Reduced for better performance */
+    padding: 14px;                       /* Full padding when expanded */
+    opacity: 1;                          /* Fully visible */
+}
+
+/* ====================================
+   ANSWER CONTENT TYPOGRAPHY
+   ==================================== */
+
+/* Heading styles within answers */
+.answer-content h1, .answer-content h2, .answer-content h3,
+.answer-content h4, .answer-content h5, .answer-content h6 {
+    margin-top: 12px;                    /* Top spacing */
+    margin-bottom: 8px;                  /* Bottom spacing */
+    color: var(--answer-text);           /* Theme text color */
+    font-size: 1.1em;                    /* Slightly larger than content */
+}
+
+/* List styling in answers */
+.answer-content ul, .answer-content ol {
+    margin: 8px 0;                       /* Vertical spacing */
+    padding-left: 16px;                  /* Indentation for bullets/numbers */
+}
+
+/* List item styling */
+.answer-content li {
+    margin: 4px 0;                       /* Item spacing */
+    line-height: 1.5;                    /* Comfortable reading */
+}
+
+/* Paragraph styling */
+.answer-content p {
+    margin: 8px 0;                       /* Paragraph spacing */
+    line-height: 1.6;                    /* Comfortable reading */
+}
+
+/* Inline code styling */
+.answer-content code {
+    background: var(--inline-code-bg);   /* Theme code background */
+    color: var(--inline-code-color);     /* Theme code text */
+    padding: 2px 6px;                    /* Compact padding */
+    border-radius: 3px;                  /* Subtle rounding */
+    font-size: 0.95em;                   /* Slightly smaller */
+    border: 1px solid var(--inline-code-border); /* Theme border */
+}
+
+/* Bold text emphasis */
+.answer-content strong {
+    font-weight: 600;                    /* Semi-bold weight */
+    color: inherit;                      /* Inherit parent color */
+}
+
+/* ====================================
+   Q&A THEME COLOR VARIABLES
+   ==================================== */
+
+/* Dark theme minimal color scheme */
+body:not([data-theme="light"]) {
+    /* Question styling variables */
+    --question-bg: var(--content-bg);                    /* Use global content background */
+    --question-border: var(--border-color);              /* Use global border color */
+    --question-header-bg: rgba(60, 60, 60, 0.8);         /* Subtle dark header background */
+    --question-header-text: var(--text-color);           /* Use global text color */
+    --question-content-bg: var(--content-bg);            /* Use global content background */
+    --question-text: var(--text-color);                  /* Use global text color */
+    
+    /* Answer styling variables */
+    --answer-bg: var(--content-bg);                      /* Use global content background */
+    --answer-border: var(--border-color);                /* Use global border color */
+    --answer-header-bg: rgba(60, 60, 60, 0.6);           /* Slightly lighter header background */
+    --answer-header-hover-bg: rgba(70, 70, 70, 0.8);     /* Hover state background */
+    --answer-header-text: var(--text-color);             /* Use global text color */
+    --answer-content-bg: var(--content-bg);              /* Use global content background */
+    --answer-text: var(--text-color);                    /* Use global text color */
+}
+
+/* Light theme clean color scheme */
+[data-theme="light"] {
+    /* Question styling variables */
+    --question-bg: rgb(250, 250, 250);                   /* Very light gray background */
+    --question-border: rgb(220, 220, 220);               /* Light gray border */
+    --question-header-bg: rgb(240, 240, 240);            /* Light header background */
+    --question-header-text: rgb(60, 60, 60);             /* Dark gray text */
+    --question-content-bg: rgb(250, 250, 250);           /* Very light content background */
+    --question-text: var(--text-color);                  /* Use global text color */
+    
+    /* Answer styling variables */
+    --answer-bg: rgb(248, 248, 248);                     /* Slightly darker answer background */
+    --answer-border: rgb(220, 220, 220);                 /* Light gray border */
+    --answer-header-bg: rgb(235, 235, 235);              /* Light header background */
+    --answer-header-hover-bg: rgb(225, 225, 225);        /* Darker hover background */
+    --answer-header-text: rgb(60, 60, 60);               /* Dark gray text */
+    --answer-content-bg: rgb(248, 248, 248);             /* Light content background */
+    --answer-text: var(--text-color);                    /* Use global text color */
+}
+
+/* ====================================
+   Q&A RESPONSIVE DESIGN
+   ==================================== */
+
+/* Tablet and medium screen adjustments */
+@media (max-width: 768px) {
+    .qa-container {
+        margin: 16px 0;                  /* Maintain spacing on tablets */
+    }
+    
+    .question-header {
+        padding: 12px 14px;              /* Slightly larger padding */
+        font-size: 1em;                  /* Standard font size */
+    }
+    
+    .question-content {
+        padding: 16px;                   /* Generous content padding */
+        font-size: 1.05em;               /* Slightly larger for readability */
+    }
+    
+    .answer-header {
+        padding: 10px 14px;              /* Comfortable header padding */
+        font-size: 0.98em;               /* Slightly smaller header text */
+    }
+    
+    .answer-content {
+        padding: 14px;                   /* Standard content padding */
+        font-size: 1em;                  /* Standard readable size */
+    }
+    
+    .answer-callout {
+        margin: 10px 12px 12px 12px;     /* Adjusted margins for tablets */
+    }
+}
+
+/* Mobile phone adjustments */
+@media (max-width: 480px) {
+    .qa-container {
+        margin: 12px 0;                  /* Reduced margin for mobile */
+    }
+    
+    .question-header, .answer-header {
+        padding: 10px 12px;              /* Compact padding for mobile */
+        font-size: 0.95em;               /* Smaller text for space efficiency */
+    }
+    
+    .question-content, .answer-content {
+        padding: 12px;                   /* Compact content padding */
+        font-size: 0.95em;               /* Optimized text size for mobile */
+    }
+    
+    .answer-callout {
+        margin: 8px 10px 10px 10px;      /* Tight margins for mobile screens */
+    }
+}
+
+/* ========================================================================
+   17. GENERAL CALLOUT SYSTEM
+   ======================================================================== */
+
+/* 
+ * VERSATILE CALLOUT COMPONENTS
+ * Colorful attention-grabbing callouts for various content types
+ */
+
+/* ====================================
+   BASE CALLOUT DESIGN
+   ==================================== */
+
+/* Universal callout container */
+.callout {
+    margin: 16px 0;                      /* Vertical spacing around callouts */
+    border-radius: 6px;                  /* Rounded corners for modern look */
+    overflow: hidden;                    /* Clean edges */
+    border-left: 4px solid;              /* Colored left border indicator */
+    background: var(--content-bg);       /* Theme background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle depth shadow */
+    transition: box-shadow 0.2s ease;    /* Smooth hover effects */
+}
+
+/* Enhanced shadow on hover */
+.callout:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Deeper shadow on interaction */
+}
+
+/* ====================================
+   CALLOUT HEADER DESIGN
+   ==================================== */
+
+/* Callout header container */
+.callout-header {
+    display: flex;                       /* Flexible layout for icon and title */
+    align-items: center;                 /* Vertical center alignment */
+    gap: 8px;                            /* Space between icon and text */
+    padding: 12px 16px;                  /* Comfortable header padding */
+    font-weight: 600;                    /* Semi-bold for emphasis */
+    font-size: 0.9em;                    /* Slightly smaller than content */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Subtle separator line */
+}
+
+/* Icon styling */
+.callout-icon {
+    font-size: 1.1em;                    /* Slightly larger than text */
+}
+
+/* Title styling */
+.callout-title {
+    text-transform: capitalize;          /* Capitalize first letter */
+}
+
+/* ====================================
+   CALLOUT CONTENT AREA
+   ==================================== */
+
+/* Main content container */
+.callout-content {
+    padding: 16px;                       /* Generous content padding */
+    line-height: 1.6;                    /* Comfortable reading line height */
+}
+
+/* First paragraph spacing */
+.callout-content p:first-child {
+    margin-top: 0;                       /* Remove top margin from first paragraph */
+}
+
+/* Last paragraph spacing */
+.callout-content p:last-child {
+    margin-bottom: 0;                    /* Remove bottom margin from last paragraph */
+}
+
+/* ====================================
+   SPECIFIC CALLOUT TYPES
+   ==================================== */
+
+/* Note callout - informational blue theme */
+.callout-note {
+    border-left-color: var(--callout-note-border);   /* Blue border indicator */
+    background: var(--callout-note-bg);              /* Light blue background */
+}
+
+.callout-note .callout-header {
+    color: var(--callout-note-text);                 /* Blue text color */
+    background: rgba(59, 130, 246, 0.1);             /* Very light blue header background */
+}
+
+.callout-note .callout-content {
+    color: var(--callout-note-text);                 /* Blue content text */
+}
+
+/* Warning callout - amber/orange theme */
+.callout-warning {
+    border-left-color: var(--callout-warning-border); /* Orange border indicator */
+    background: var(--callout-warning-bg);            /* Light orange background */
+}
+
+.callout-warning .callout-header {
+    color: var(--callout-warning-text);               /* Orange text color */
+    background: rgba(245, 158, 11, 0.1);              /* Very light orange header background */
+}
+
+.callout-warning .callout-content {
+    color: var(--callout-warning-text);               /* Orange content text */
+}
+
+/* Tip callout - green theme */
+.callout-tip {
+    border-left-color: var(--callout-tip-border);     /* Green border indicator */
+    background: var(--callout-tip-bg);                /* Light green background */
+}
+
+.callout-tip .callout-header {
+    color: var(--callout-tip-text);                   /* Green text color */
+    background: rgba(34, 197, 94, 0.1);               /* Very light green header background */
+}
+
+.callout-tip .callout-content {
+    color: var(--callout-tip-text);                   /* Green content text */
+}
+
+/* Info callout - sky blue theme */
+.callout-info {
+    border-left-color: var(--callout-info-border);    /* Sky blue border indicator */
+    background: var(--callout-info-bg);               /* Light sky blue background */
+}
+
+.callout-info .callout-header {
+    color: var(--callout-info-text);                  /* Sky blue text color */
+    background: rgba(14, 165, 233, 0.1);              /* Very light sky blue header background */
+}
+
+.callout-info .callout-content {
+    color: var(--callout-info-text);                  /* Sky blue content text */
+}
+
+/* Success callout - emerald green theme */
+.callout-success {
+    border-left-color: var(--callout-success-border); /* Emerald border indicator */
+    background: var(--callout-success-bg);            /* Light emerald background */
+}
+
+.callout-success .callout-header {
+    color: var(--callout-success-text);               /* Emerald text color */
+    background: rgba(34, 197, 94, 0.1);               /* Very light emerald header background */
+}
+
+.callout-success .callout-content {
+    color: var(--callout-success-text);               /* Emerald content text */
+}
+
+/* Error callout - red theme */
+.callout-error {
+    border-left-color: var(--callout-error-border);   /* Red border indicator */
+    background: var(--callout-error-bg);              /* Light red background */
+}
+
+.callout-error .callout-header {
+    color: var(--callout-error-text);                 /* Red text color */
+    background: rgba(239, 68, 68, 0.1);               /* Very light red header background */
+}
+
+.callout-error .callout-content {
+    color: var(--callout-error-text);                 /* Red content text */
+}
+
+/* Question callout - uses note styling */
+.callout-question {
+    border-left-color: var(--callout-note-border);    /* Blue border like note */
+    background: var(--callout-note-bg);               /* Blue background like note */
+}
+
+.callout-question .callout-header {
+    color: var(--callout-note-text);                  /* Blue text color like note */
+    background: rgba(59, 130, 246, 0.1);              /* Very light blue header background */
+}
+
+.callout-question .callout-content {
+    color: var(--callout-note-text);                  /* Blue content text like note */
+}
+
+/* Example callout - purple theme */
+.callout-example {
+    border-left-color: var(--callout-example-border); /* Purple border indicator */
+    background: var(--callout-example-bg);            /* Light purple background */
+}
+
+.callout-example .callout-header {
+    color: var(--callout-example-text);               /* Purple text color */
+    background: rgba(168, 85, 247, 0.1);              /* Very light purple header background */
+}
+
+.callout-example .callout-content {
+    color: var(--callout-example-text);               /* Purple content text */
+}
+
+/* Important callout - rose/pink theme */
+.callout-important {
+    border-left-color: var(--callout-important-border); /* Rose border indicator */
+    background: var(--callout-important-bg);            /* Light rose background */
+}
+
+.callout-important .callout-header {
+    color: var(--callout-important-text);               /* Rose text color */
+    background: rgba(244, 63, 94, 0.1);                 /* Very light rose header background */
+}
+
+.callout-important .callout-content {
+    color: var(--callout-important-text);               /* Rose content text */
+}
+
+/* ========================================================================
+   END OF CSS FRAMEWORK
+   ======================================================================== */
+
+/* 
+ * COMPREHENSIVE EDUCATIONAL CSS FRAMEWORK - COMPLETE
+ * 
+ * This framework provides a complete theming and component system for
+ * educational content with dark/light mode support, responsive design,
+ * interactive elements, and comprehensive typography.
+ * 
+ * Total Sections: 17 major component systems
+ * Theme Support: Full dark/light mode with CSS custom properties
+ * Responsive: Mobile-first approach with multiple breakpoints
+ * Components: Tables, modals, callouts, file browsers, Q&A systems
+ * Documentation: Every CSS property explained with purpose and effect
+ * 
+ * Maintained by: Educational Content Framework Team
+ * Last Updated: Comprehensive documentation and restructuring complete
+ */
+
+/* ========================================================================
+   LUXURY ANIMATION UTILITY CLASSES
+   ======================================================================== */
+
+/* ====================================
+   ENTRANCE ANIMATIONS
+   ==================================== */
+
+/* Luxury fade in with scale */
+.animate-luxury-fade {
+    animation: fadeInUp 0.8s ease-out both;
+}
+
+/* Slide in from left */
+.animate-slide-left {
+    animation: slideInLeft 0.6s ease-out both;
+}
+
+/* Floating animation - only on hover */
+.animate-float:hover {
+    animation: float 2s ease-in-out;
+}
+
+/* Elegant bounce - only on hover */
+.animate-bounce:hover {
+    animation: elegantBounce 1s ease-in-out;
+}
+
+/* Glow pulse effect - only on hover */
+.animate-glow:hover {
+    animation: glowPulse 1s ease-in-out;
+}
+
+/* Shimmer effect - only on hover */
+.animate-shimmer {
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(252, 169, 60, 0.4), 
+        transparent);
+    background-size: 200% 100%;
+}
+
+.animate-shimmer:hover {
+    animation: shimmer 1s ease-in-out;
+}
+
+/* ====================================
+   HOVER EFFECTS
+   ==================================== */
+
+/* Luxury hover lift */
+.hover-lift {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Glow on hover */
+.hover-glow {
+    transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(252, 169, 60, 0.5);
+    transform: scale(1.05);
+}
+
+/* Scale on hover */
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.1);
+}
+
+/* ====================================
+   GLASS EFFECTS
+   ==================================== */
+
+/* Glass morphism */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced glass */
+.glass-enhanced {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* ====================================
+   GRADIENT EFFECTS
+   ==================================== */
+
+/* Primary gradient */
+.gradient-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+/* Animated gradient - only on hover */
+.gradient-animated:hover {
+    background: linear-gradient(270deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+    background-size: 400% 400%;
+    animation: gradientShift 2s ease-in-out;
+}
+
+/* ====================================
+   STAGGER DELAYS
+   ==================================== */
+
+/* For staggered animations */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+
+/* ========================================================================
+   READING COMFORT OPTIMIZATIONS
+   ======================================================================== */
+
+/* ====================================
+   REDUCED MOTION PREFERENCES
+   ==================================== */
+
+/* Respect user's motion preferences for accessibility and reading comfort */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ====================================
+   READING-FOCUSED IMPROVEMENTS
+   ==================================== */
+
+/* Improved text selection for comfortable reading */
+::selection {
+    background: rgba(252, 169, 60, 0.2);
+    color: inherit;
+}
+
+[data-theme="light"] ::selection {
+    background: rgba(252, 169, 60, 0.15);
+    color: inherit;
+}
+
+/* Focus indicators for keyboard navigation */
+*:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* ====================================
+   PRINT OPTIMIZATIONS
+   ==================================== */
+
+@media print {
+    /* Remove animations and effects for printing */
+    * {
+        animation: none !important;
+        transition: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    /* Optimize colors for printing */
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    /* Ensure good contrast for printed tables */
+    table, th, td {
+        border: 1px solid #333 !important;
+        background: white !important;
+        color: black !important;
+    }
+    
+    th {
+        background: #f0f0f0 !important;
+        color: black !important;
+    }
+}
+

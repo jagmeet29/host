@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with LaTeX</title>
+    
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="1.css">
+    <script>
+        // Configure MathJ ax
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode">
+        🌙
+    </button>
+    
+    <div id="file-browser">
+        <div class="browser-header">
+            <h3>📁 File Browser</h3>
+            <div class="header-buttons">
+                <button onclick="toggleCompactView()" class="compact-btn" title="Toggle compact view">📋</button>
+                <button onclick="refreshFileList()" class="refresh-btn" title="Refresh file list">🔄</button>
+                <button onclick="clearSavedState()" class="clear-btn" title="Go to main screen">🏠</button>
+            </div>
+        </div>
+        <div id="current-path">📍 Current: <span id="current-path-text">notesob/</span></div>
+        <div id="file-list">
+            <div class="loading">🔄 Loading files...</div>
+        </div>
+        <div id="current-file">📄 Viewing: <span id="current-file-name">None</span></div>
+    </div>
+    
+    <div id="content"></div>
+    
+    <script>
+        let currentPath = '../notesob';
+        let fileCache = new Map();
+        
+        // Theme toggle functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeToggleBtn = document.querySelector('.theme-toggle');
+            
+            if (html.getAttribute('data-theme') === 'light') {
+                html.removeAttribute('data-theme');
+                themeToggleBtn.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                themeToggleBtn.textContent = '☀️';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+        
+        // Initialize theme from localStorage
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggleBtn = document.querySelector('.theme-toggle');
+            
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeToggleBtn.textContent = '☀️';
+            } else {
+                themeToggleBtn.textContent = '🌙';
+            }
+        }
+        
+        // Compact view toggle functionality
+        function toggleCompactView() {
+            const fileList = document.getElementById('file-list');
+            const compactBtn = document.querySelector('.compact-btn');
+            
+            if (fileList.classList.contains('compact-view')) {
+                fileList.classList.remove('compact-view');
+                compactBtn.textContent = '📋';
+                compactBtn.title = 'Toggle compact view';
+                localStorage.setItem('compactView', 'false');
+            } else {
+                fileList.classList.add('compact-view');
+                compactBtn.textContent = '📄';
+                compactBtn.title = 'Toggle full view';
+                localStorage.setItem('compactView', 'true');
+            }
+        }
+        
+        // Initialize compact view from localStorage
+        function initCompactView() {
+            const savedCompactView = localStorage.getItem('compactView');
+            const fileList = document.getElementById('file-list');
+            const compactBtn = document.querySelector('.compact-btn');
+            
+            if (savedCompactView === 'true') {
+                fileList.classList.add('compact-view');
+                compactBtn.textContent = '📄';
+                compactBtn.title = 'Toggle full view';
+            } else {
+                compactBtn.textContent = '📋';
+                compactBtn.title = 'Toggle compact view';
+            }
+        }
+        
+        // Function to discover files and folders dynamically
+        async function discoverPath(path) {
+            console.log('Discovering path:', path);
+            
+            if (fileCache.has(path)) {
+                console.log('Using cached data for:', path);
+                return fileCache.get(path);
+            }
+            
+            const result = { files: [], folders: [] };
+            
+            try {
+                // Try to fetch a directory listing (this requires server support)
+                // Alternative: Use a known index file or API endpoint
+                const listingUrl = `${path}/directory-listing.json`;  // Changed from .directory-listing.json
+                console.log('Fetching listing from:', listingUrl);
+                
+                const response = await fetch(listingUrl);
+                if (response.ok) {
+                    const listing = await response.json();
+                    console.log('Received listing:', listing);
+                    result.files = listing.files || [];
+                    result.folders = listing.folders || [];
+                } else {
+                    console.warn(`Directory listing fetch failed with status: ${response.status}`);
+                    // Fallback: Try to discover files by attempting to fetch common files
+                    await discoverFilesByProbing(path, result);
+                }
+            } catch (error) {
+                console.warn(`Could not fetch directory listing for ${path}, using fallback discovery`, error);
+                await discoverFilesByProbing(path, result);
+            }
+            
+            console.log('Final result for', path, ':', result);
+            fileCache.set(path, result);
+            return result;
+        }
+        
+        // Fallback method: probe for common files and folders
+        async function discoverFilesByProbing(path, result) {
+            // Common markdown file patterns to check
+            const commonFiles = [
+                'index.md', 'Index.md', 'README.md', 'readme.md',
+                'command.md', 'commands.md', 'CV.md', 'cv.md',
+                'Gate.md', 'gate.md', 'notes.md', 'Notes.md',
+                'md.md', 'out.md', 'output.md', 'UI.md', 'ui.md',
+                'semiconductorJob.md', 'basic.md', 'assumptions.md',
+                'evaluation.md', 'typesOfLearing.md', 'conductivity.md',
+                'mobility.md', 'resistivity.md', 'scattering.md'
+            ];
+            
+            // Common folder names to check
+            const commonFolders = [
+                'Chats', 'chats', 'DE', 'de', 'EDC', 'edc',
+                'Linux', 'linux', 'ML', 'ml', 'Python', 'python',
+                'Boolean', 'Combinational', 'Sequential', 'Img', 'img',
+                'PW', 'pw', 'Verilog', 'verilog', 'Task', 'task'
+            ];
+            
+            // Probe for files
+            for (const file of commonFiles) {
+                try {
+                    const response = await fetch(`${path}/${file}`, { method: 'HEAD' });
+                    if (response.ok) {
+                        result.files.push(file);
+                    }
+                } catch (e) {
+                    // File doesn't exist, continue
+                }
+            }
+            
+            // Probe for folders by checking for index files or known files within them
+            for (const folder of commonFolders) {
+                try {
+                    // Try to access the folder by checking for common files inside
+                    const testFiles = ['index.md', 'Index.md', 'README.md'];
+                    let folderExists = false;
+                    
+                    for (const testFile of testFiles) {
+                        try {
+                            const response = await fetch(`${path}/${folder}/${testFile}`, { method: 'HEAD' });
+                            if (response.ok) {
+                                folderExists = true;
+                                break;
+                            }
+                        } catch (e) {
+                            // Continue checking
+                        }
+                    }
+                    
+                    if (folderExists) {
+                        result.folders.push(folder);
+                    }
+                } catch (e) {
+                    // Folder doesn't exist, continue
+                }
+            }
+        }
+        
+        // Enhanced discovery using fetch with error handling
+        async function smartDiscovery(path) {
+            const result = { files: [], folders: [] };
+            
+            // Try to use the file system API if available (for local files)
+            if (window.showDirectoryPicker) {
+                try {
+                    // This would work in modern browsers with file system access
+                    // But requires user permission
+                    return await useFileSystemAPI(path);
+                } catch (e) {
+                    console.log('File System API not available or permission denied');
+                }
+            }
+            
+            // Fallback to our probing method
+            await discoverFilesByProbing(path, result);
+            return result;
+        }
+        
+        async function renderFileList(path = currentPath) {
+            const fileListDiv = document.getElementById('file-list');
+            fileListDiv.innerHTML = '<div class="loading">🔄 Discovering files...</div>';
+            
+            try {
+                const pathData = await discoverPath(path);
+                
+                let html = '';
+                
+                // Add back button if not in root
+                if (path !== '../notesob') {
+                    const parentPath = path.split('/').slice(0, -1).join('/');
+                    html += `<button onclick="navigateToFolder('${parentPath}')" class="folder-btn back-btn">📁 .. (Back)</button>`;
+                }
+                
+                // Sort folders and files alphabetically
+                const sortedFolders = [...pathData.folders]
+                    .filter(folder => !folder.startsWith('.')) // Filter out hidden folders
+                    .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+                const sortedFiles = [...pathData.files].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+                
+                console.log('Folders found:', pathData.folders);
+                console.log('Filtered folders:', sortedFolders);
+                console.log('Files found:', pathData.files);
+                
+                // Add folders
+                sortedFolders.forEach(folder => {
+                    const folderPath = `${path}/${folder}`;
+                    html += `<button onclick="navigateToFolder('${folderPath}')" class="folder-btn" title="${folder}/">
+                        <span class="icon">📁</span>
+                        <span class="name">${folder}/</span>
+                    </button>`;
+                });
+                
+                // Add files (only .md files)
+                sortedFiles.forEach(file => {
+                    if (file.endsWith('.md')) {
+                        const filePath = `${path}/${file}`;
+                        const displayName = file.replace('.md', '');
+                        html += `<button onclick="loadMarkdown('${filePath}')" class="file-btn" data-file="${filePath}" title="${file}">
+                            <span class="icon">📄</span>
+                            <span class="name">${displayName}</span>
+                        </button>`;
+                    }
+                });
+                
+                if (sortedFiles.filter(f => f.endsWith('.md')).length === 0 && sortedFolders.length === 0) {
+                    html += '<div class="empty">📂 No markdown files or folders found</div>';
+                }
+                
+                fileListDiv.innerHTML = html;
+                document.getElementById('current-path-text').textContent = path.replace('../', '');
+                
+            } catch (error) {
+                console.error('Error discovering files:', error);
+                fileListDiv.innerHTML = '<div class="error">❌ Error discovering files. Check console for details.</div>';
+            }
+        }
+        
+        function refreshFileList() {
+            // Clear the cache and reload current directory
+            fileCache.clear();
+            renderFileList(currentPath);
+            
+            // If there's a currently loaded file, reload it too
+            const currentFile = localStorage.getItem('currentFile');
+            if (currentFile) {
+                setTimeout(async () => {
+                    await loadMarkdown(currentFile);
+                }, 100);
+            }
+        }
+        
+        // Function to clear saved state (useful for starting fresh)
+        function clearSavedState() {
+            localStorage.removeItem('currentPath');
+            localStorage.removeItem('currentFile');
+            currentPath = '../notesob';
+            document.getElementById('content').innerHTML = '';
+            document.getElementById('current-file-name').textContent = 'None';
+            renderFileList();
+        }
+        
+        function navigateToFolder(path) {
+            currentPath = path;
+            // Save current path to localStorage
+            localStorage.setItem('currentPath', path);
+            renderFileList(path);
+        }
+        
+        // Function to process wiki-style links
+        function processWikiLinks(text, currentFilePath) {
+            // Get the current directory to resolve relative paths
+            const currentDir = currentFilePath.substring(0, currentFilePath.lastIndexOf('/'));
+            
+            // Process image embeds: ![[image.ext]]
+            text = text.replace(/!\[\[([^\]]+)\]\]/g, (match, filename) => {
+                // Check if it's an image file
+                const imageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.bmp'];
+                const isImage = imageExtensions.some(ext => filename.toLowerCase().endsWith(ext));
+                
+                if (isImage) {
+                    // Try different path combinations
+                    const imagePaths = [
+                        `${currentDir}/${filename}`,
+                        `${currentDir}/img/${filename}`,
+                        `${currentDir}/images/${filename}`,
+                        `${currentPath}/img/${filename}`,
+                        `${currentPath}/images/${filename}`,
+                        `../notesob/img/${filename}`
+                    ];
+                    
+                    // Create multiple img elements with different src attempts
+                    let imgHtml = '<div class="wiki-image">';
+                    imagePaths.forEach((path, index) => {
+                        imgHtml += `<img src="${path}" alt="${filename}" title="${filename}" 
+                                         style="display:${index === 0 ? 'block' : 'none'}" 
+                                         onerror="this.style.display='none'; if(this.nextElementSibling && this.nextElementSibling.tagName==='IMG') this.nextElementSibling.style.display='block'; else if(!this.parentElement.querySelector('img[style*=block]')) this.parentElement.querySelector('.image-error').style.display='block';" />`;
+                    });
+                    imgHtml += `<div class="image-error" style="display:none; padding: 10px; border: 1px dashed #ccc; text-align: center; color: #666;">
+                        📷 Image not found: ${filename}
+                        <br><small>Searched in: img/, images/, current folder</small>
+                    </div></div>`;
+                    
+                    return imgHtml;
+                } else {
+                    // Treat as file link for non-images
+                    return `[[${filename}]]`; // Keep for file link processing
+                }
+            });
+            
+            // Process file links: [[file]] or [[file|display text]]
+            text = text.replace(/\[\[([^\]]+)\]\]/g, (match, content) => {
+                const parts = content.split('|');
+                const filename = parts[0].trim();
+                const displayText = parts[1] ? parts[1].trim() : filename;
+                
+                // Remove .md extension for display if not custom text
+                const cleanDisplayText = parts[1] ? displayText : filename.replace(/\.md$/, '');
+                
+                // Generate file path
+                let filePath;
+                if (filename.includes('/')) {
+                    // Full path provided
+                    filePath = filename;
+                } else {
+                    // Relative to current directory
+                    filePath = `${currentDir}/${filename}`;
+                    // Add .md extension if not present
+                    if (!filename.includes('.')) {
+                        filePath += '.md';
+                    }
+                }
+                
+                return `<a href="#" onclick="loadWikiFile('${filePath}')" class="wiki-link" title="Open ${filename}">📄 ${cleanDisplayText}</a>`;
+            });
+            
+            return text;
+        }
+        
+        // Function to process Q&A format
+        function processQAFormat(text) {
+            /*
+             * Pattern logic (now more forgiving with spaces and empty lines):
+             *  > [!question] <question line> (allows spaces after >)
+             *  (optional empty lines)
+             *  >> [!success]- Answer (allows spaces and optional dash)
+             *  (optional empty lines in answer)
+             *  >> answer / explanation lines (may include blank '>>' spacer lines)
+             *  Stops when a non '>>' line appears (next question, heading, hr, etc.)
+             */
+            
+            // Split text into lines for better processing
+            const lines = text.split('\n');
+            const result = [];
+            let i = 0;
+            
+            while (i < lines.length) {
+                const line = lines[i];
+                
+                // Check if this line starts a question (more forgiving with spaces)
+                const questionMatch = line.match(/^>\s*\[!question\]\s*(.+)/i);
+                
+                if (questionMatch) {
+                    const questionText = questionMatch[1];
+                    i++; // Move to next line
+                    
+                    // Skip any empty lines or lines with just '>'
+                    while (i < lines.length && (lines[i].trim() === '' || lines[i].match(/^>\s*$/))) {
+                        i++;
+                    }
+                    
+                    // Look for the answer line (more forgiving with spaces and dashes)
+                    if (i < lines.length && lines[i].match(/^>\s*>\s*\[!success\]\s*-?\s*Answer\s*$/i)) {
+                        i++; // Skip the answer header line
+                        
+                        // Skip any empty lines after answer header
+                        while (i < lines.length && (lines[i].trim() === '' || lines[i].match(/^>\s*>\s*$/))) {
+                            i++;
+                        }
+                        
+                        // Collect all answer content lines that start with '>>' or '> >'
+                        let answerContent = '';
+                        while (i < lines.length && lines[i].match(/^>\s*>\s*/)) {
+                            const answerLine = lines[i].replace(/^>\s*>\s*/, '');
+                            // Only add non-empty content lines
+                            if (answerLine.trim() !== '') {
+                                if (answerContent) answerContent += '\n';
+                                answerContent += answerLine;
+                            } else {
+                                // Add empty line for spacing if there's already content
+                                if (answerContent) answerContent += '\n';
+                            }
+                            i++;
+                        }
+                        
+                        // Process the answer content as markdown
+                        let answerHTML = (typeof marked !== 'undefined') ? marked.parse(answerContent.trim()) : answerContent.trim();
+                        
+                        // Generate unique ID for this Q&A pair
+                        const qaId = `qa-${Math.random().toString(36).substr(2, 9)}`;
+                        
+                        const qaHtml = `<div class="qa-container">
+    <div class="question-callout">
+        <div class="question-header">❓ Question</div>
+        <div class="question-content">${questionText.trim()}</div>
+    </div>
+    <div class="answer-callout">
+        <div class="answer-header" onclick="toggleAnswer('${qaId}')">✅ Answer</div>
+        <div class="answer-content" id="${qaId}">${answerHTML}</div>
+    </div>
+</div>`;
+                        
+                        result.push(qaHtml);
+                    } else {
+                        // No proper answer found, treat as regular line
+                        result.push(line);
+                        i++;
+                    }
+                } else {
+                    // Regular line, add as-is
+                    result.push(line);
+                    i++;
+                }
+            }
+            
+            return result.join('\n');
+        }
+        
+        // Function to toggle answer visibility
+        function toggleAnswer(answerId) {
+            const answerElement = document.getElementById(answerId);
+            if (answerElement) {
+                answerElement.classList.toggle('expanded');
+                
+                // Toggle the arrow direction on the header
+                const header = answerElement.previousElementSibling;
+                if (header && header.classList.contains('answer-header')) {
+                    header.classList.toggle('expanded');
+                }
+            }
+        }
+        
+        // Function to initialize Q&A elements
+        function initializeQAElements() {
+            // Add click event listeners to any answer headers that might not have them
+            const answerHeaders = document.querySelectorAll('.answer-header');
+            answerHeaders.forEach(header => {
+                if (!header.onclick) {
+                    const answerId = header.nextElementSibling?.id;
+                    if (answerId) {
+                        header.onclick = () => toggleAnswer(answerId);
+                    }
+                }
+            });
+        }
+        
+        // Function to wrap tables with scrollable container
+        function wrapTablesForScrolling() {
+            const tables = document.querySelectorAll('#content table');
+            tables.forEach(table => {
+                // Check if table is not already wrapped
+                if (!table.parentElement.classList.contains('table-wrapper')) {
+                    // Create wrapper div
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'table-wrapper';
+                    
+                    // Insert wrapper before table and move table into wrapper
+                    table.parentNode.insertBefore(wrapper, table);
+                    wrapper.appendChild(table);
+                }
+            });
+        }
+        
+        // Function to process general callouts (Note, Warning, Tip, etc.)
+        function processGeneralCallouts(text) {
+            // Split text into lines for better processing
+            const lines = text.split('\n');
+            const result = [];
+            let i = 0;
+            
+            while (i < lines.length) {
+                const line = lines[i];
+                
+                // Check if this line starts a callout
+                const calloutMatch = line.match(/^>\s*\[!(note|warning|tip|info|success|error|question|example|important)\]\s*(.*)/i);
+                
+                if (calloutMatch) {
+                    const type = calloutMatch[1].toLowerCase();
+                    let content = calloutMatch[2] || '';
+                    i++; // Move to next line
+                    
+                    // Collect all continuation lines that start with '>'
+                    while (i < lines.length && lines[i].match(/^>\s*/)) {
+                        const continuationContent = lines[i].replace(/^>\s*/, '');
+                        if (content) content += '\n';
+                        content += continuationContent;
+                        i++;
+                    }
+                    
+                    // Define callout styles and icons
+                    const calloutStyles = {
+                        note: { icon: '📝', class: 'callout-note', title: 'Note' },
+                        warning: { icon: '⚠️', class: 'callout-warning', title: 'Warning' },
+                        tip: { icon: '💡', class: 'callout-tip', title: 'Tip' },
+                        info: { icon: 'ℹ️', class: 'callout-info', title: 'Info' },
+                        success: { icon: '✅', class: 'callout-success', title: 'Success' },
+                        error: { icon: '❌', class: 'callout-error', title: 'Error' },
+                        question: { icon: '❓', class: 'callout-question', title: 'Question' },
+                        example: { icon: '📋', class: 'callout-example', title: 'Example' },
+                        important: { icon: '🔥', class: 'callout-important', title: 'Important' }
+                    };
+                    
+                    const style = calloutStyles[type] || calloutStyles.note;
+                    
+                    // Process the content as markdown (for links, formatting, etc.)
+                    const processedContent = (typeof marked !== 'undefined') ? marked.parse(content.trim()) : content.trim();
+                    
+                    const calloutHtml = `<div class="callout ${style.class}">
+    <div class="callout-header">
+        <span class="callout-icon">${style.icon}</span>
+        <span class="callout-title">${style.title}</span>
+    </div>
+    <div class="callout-content">${processedContent}</div>
+</div>`;
+                    
+                    result.push(calloutHtml);
+                } else {
+                    // Regular line, add as-is
+                    result.push(line);
+                    i++;
+                }
+            }
+            
+            return result.join('\n');
+        }
+        
+        // Function to load a file from a wiki link and navigate to its folder if needed
+        async function loadWikiFile(filePath) {
+            try {
+                // Check if file exists first
+                const response = await fetch(filePath, { method: 'HEAD' });
+                if (response.ok) {
+                    // File exists, load it directly
+                    await loadMarkdown(filePath);
+                } else {
+                    // File doesn't exist at the direct path, try to find it
+                    await findAndLoadWikiFile(filePath);
+                }
+            } catch (error) {
+                console.warn('Could not load wiki file directly, trying to find it:', error);
+                await findAndLoadWikiFile(filePath);
+            }
+        }
+        
+        // Function to search for a wiki file across directories
+        async function findAndLoadWikiFile(originalPath) {
+            const filename = originalPath.split('/').pop();
+            const filenameWithoutExt = filename.replace(/\.md$/, '');
+            
+            // Search in common directories
+            const searchPaths = [
+                `../notesob/${filename}`,
+                `../notesob/${filenameWithoutExt}.md`,
+                `${currentPath}/${filename}`,
+                `${currentPath}/${filenameWithoutExt}.md`
+            ];
+            
+            for (const searchPath of searchPaths) {
+                try {
+                    const response = await fetch(searchPath, { method: 'HEAD' });
+                    if (response.ok) {
+                        // Found the file, navigate to its directory and load it
+                        const fileDir = searchPath.substring(0, searchPath.lastIndexOf('/'));
+                        if (fileDir !== currentPath) {
+                            await navigateToFolder(fileDir);
+                            // Wait for navigation to complete
+                            setTimeout(async () => {
+                                await loadMarkdown(searchPath);
+                            }, 200);
+                        } else {
+                            await loadMarkdown(searchPath);
+                        }
+                        return;
+                    }
+                } catch (e) {
+                    // Continue searching
+                }
+            }
+            
+            // File not found anywhere
+            document.getElementById('content').innerHTML = `
+                <div style="color: orange; padding: 20px; border: 1px solid orange; border-radius: 5px; margin: 20px;">
+                    <h3>🔍 Wiki Link Not Found</h3>
+                    <p><strong>File:</strong> ${filename}</p>
+                    <p>Could not find this file in the current directory or common locations.</p>
+                    <p><strong>Searched:</strong></p>
+                    <ul>
+                        ${searchPaths.map(path => `<li>${path}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+        
+        async function loadMarkdown(filePath) {
+            try {
+                // Save current file to localStorage
+                localStorage.setItem('currentFile', filePath);
+                
+                // Update current file indicator
+                document.getElementById('current-file-name').textContent = filePath.split('/').pop();
+                
+                // Update active button
+                document.querySelectorAll('.file-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelector(`[data-file="${filePath}"]`)?.classList.add('active');
+                
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                let markdownText = await response.text();
+                
+                // Process wiki links before markdown conversion
+                markdownText = processWikiLinks(markdownText, filePath);
+                
+                // Process Q&A format
+                markdownText = processQAFormat(markdownText);
+                
+                // Process general callouts (Note, Warning, Tip, etc.)
+                markdownText = processGeneralCallouts(markdownText);
+                
+                // Convert markdown to HTML
+                const htmlContent = marked.parse(markdownText);
+                
+                // Insert into page
+                document.getElementById('content').innerHTML = htmlContent;
+                
+                // Wrap tables for proper scrolling behavior
+                wrapTablesForScrolling();
+                
+                // Process any remaining Q&A elements that might need JavaScript
+                initializeQAElements();
+                
+                // Re-render MathJax after content is loaded
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+                
+            } catch (error) {
+                console.error('Error loading markdown:', error);
+                document.getElementById('content').innerHTML = `
+                    <div style="color: red; padding: 20px; border: 1px solid red; border-radius: 5px; margin: 20px;">
+                        <h3>❌ Error Loading File</h3>
+                        <p><strong>File:</strong> ${filePath}</p>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <p>Please check if the file exists and is accessible.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Function to restore state from localStorage
+        async function restoreState() {
+            const savedPath = localStorage.getItem('currentPath');
+            const savedFile = localStorage.getItem('currentFile');
+            
+            if (savedPath) {
+                currentPath = savedPath;
+            }
+            
+            // Render the file list first
+            await renderFileList(currentPath);
+            
+            // If there was a saved file, load it
+            if (savedFile) {
+                // Wait a bit for the file list to render
+                setTimeout(async () => {
+                    await loadMarkdown(savedFile);
+                }, 100);
+            }
+        }
+        
+        // Initialize the file browser
+        document.addEventListener('DOMContentLoaded', function() {
+            initTheme();
+            initCompactView();
+            restoreState(); // Use restoreState instead of renderFileList
+        });
+    </script>
+</body>
+</html>

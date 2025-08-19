@@ -1,0 +1,32 @@
+# Large files that should not be tracked
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.wmv
+
+# Large PDF files (consider using Git LFS for important ones)
+*.pdf
+
+# Audio files
+*.mp3
+*.wav
+*.flac
+
+# Temporary files
+Thumbs.db
+.DS_Store
+
+# Large archives
+*.zip
+*.rar
+*.7z
+
+# Compiled files
+*.exe
+*.dll
+*.so
+
+# Large image files (consider using Git LFS)
+*.psd
+*.ai

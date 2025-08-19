@@ -1,0 +1,5 @@
+![[Simplification_Kmap_6VarKmap.png|500]]
+![[Simplification_Kmap_5VarKmap.png|500]]
+![[Simplification_Kmap_4VarKmap.png|500]]
+![[Simplification_Kmap_KmapRules.png|500]]
+![[Kmapdontcare.png|500]]

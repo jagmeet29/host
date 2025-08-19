@@ -1,0 +1,23 @@
+{
+  "files": [
+    "Adder.md",
+    "CarryLookimg.md",
+    "Combinational.md",
+    "Decoder.md",
+    "Dmux.md",
+    "Encoder.md",
+    "Encoderimg.md",
+    "MUX.md",
+    "Riple&LookaheadAdder.md",
+    "RipleSub.md",
+    "Riplecarryimg.md",
+    "Subtractor.md",
+    "directory-listing.json"
+  ],
+  "folders": [
+    "QAns",
+    "img"
+  ],
+  "path": "D:\\my\\Whiteboards\\study\\Hosted\\s1\\notesob\\DE\\Combinational",
+  "last_updated": "1755516089.921745"
+}

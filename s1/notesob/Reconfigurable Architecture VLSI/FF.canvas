@@ -1,0 +1,156 @@
+{
+	"edges":[
+		{"id":"ab7bd8e3579c9719","fromNode":"c848f21ad704fb04","fromSide":"bottom","toNode":"0878d0c540e948e4","toSide":"top"},
+		{"id":"37846a7807ffb5a2","fromNode":"c848f21ad704fb04","fromSide":"bottom","toNode":"84069416eec9a384","toSide":"top"},
+		{"id":"bb43f04005614eb4","fromNode":"0878d0c540e948e4","fromSide":"bottom","toNode":"7727e7169247efff","toSide":"top"},
+		{
+			"id":"b3ba452212464135",
+			"styleAttributes":{
+				"path":null,
+				"pathfindingMethod":null
+			},
+			"fromNode":"84069416eec9a384",
+			"fromSide":"bottom",
+			"toNode":"170efa6245656656",
+			"toSide":"top"
+		},
+		{
+			"id":"f03efc8a5aedf038",
+			"styleAttributes":{},
+			"fromNode":"0878d0c540e948e4",
+			"fromSide":"bottom",
+			"toNode":"cf230755cb849826",
+			"toSide":"top"
+		},
+		{
+			"id":"8d3ec9464f091ff7",
+			"styleAttributes":{},
+			"fromNode":"0878d0c540e948e4",
+			"fromSide":"bottom",
+			"toNode":"92b1612ae9301831",
+			"toSide":"top"
+		},
+		{
+			"id":"e575a5b0a3fa1ce6",
+			"styleAttributes":{},
+			"fromNode":"84069416eec9a384",
+			"fromSide":"bottom",
+			"toNode":"56eae31b72b05415",
+			"toSide":"top"
+		},
+		{
+			"id":"bb66ed2421db89cf",
+			"styleAttributes":{
+				"path":null,
+				"pathfindingMethod":null
+			},
+			"fromNode":"4625124d29da2f3e",
+			"fromSide":"bottom",
+			"toNode":"c17bc2f13f88ed50",
+			"toSide":"top"
+		},
+		{
+			"id":"53b4ef3ec749709f",
+			"styleAttributes":{},
+			"fromNode":"4625124d29da2f3e",
+			"fromSide":"bottom",
+			"toNode":"46a45ac57a0a5d82",
+			"toSide":"top"
+		},
+		{"id":"765c6cbbb5dd2540","fromNode":"50116b187e54489b","fromSide":"bottom","toNode":"4625124d29da2f3e","toSide":"top"},
+		{
+			"id":"3bb7c34e65945b26",
+			"styleAttributes":{},
+			"fromNode":"ed6eba6d9977a892",
+			"fromSide":"bottom",
+			"toNode":"db82714771474513",
+			"toSide":"top"
+		},
+		{
+			"id":"6e95284c254ca93e",
+			"styleAttributes":{},
+			"fromNode":"ed6eba6d9977a892",
+			"fromSide":"bottom",
+			"toNode":"70bf9a7e0a001d08",
+			"toSide":"top"
+		},
+		{"id":"9d4fd000aa7df7d2","fromNode":"50116b187e54489b","fromSide":"bottom","toNode":"ed6eba6d9977a892","toSide":"top"},
+		{
+			"id":"1e70e593883200f8",
+			"styleAttributes":{},
+			"fromNode":"e61a7988ecb2d07e",
+			"fromSide":"bottom",
+			"toNode":"99b5caa71ed94507",
+			"toSide":"top"
+		},
+		{
+			"id":"c8e64231aecab76e",
+			"styleAttributes":{},
+			"fromNode":"e61a7988ecb2d07e",
+			"fromSide":"bottom",
+			"toNode":"32a4468b48a65d70",
+			"toSide":"top"
+		},
+		{
+			"id":"b8f452f899a45a73",
+			"styleAttributes":{},
+			"fromNode":"e61a7988ecb2d07e",
+			"fromSide":"bottom",
+			"toNode":"edb73e1106a48677",
+			"toSide":"top"
+		},
+		{
+			"id":"216df67ada5ec85a",
+			"styleAttributes":{},
+			"fromNode":"931f90fd64066354",
+			"fromSide":"bottom",
+			"toNode":"23c21f4fcb4b34dc",
+			"toSide":"top"
+		},
+		{
+			"id":"0fe48099155ff529",
+			"styleAttributes":{},
+			"fromNode":"931f90fd64066354",
+			"fromSide":"bottom",
+			"toNode":"906011761df00b07",
+			"toSide":"top"
+		},
+		{
+			"id":"dfe211f3b27af979",
+			"styleAttributes":{},
+			"fromNode":"931f90fd64066354",
+			"fromSide":"bottom",
+			"toNode":"28eb851fbacffc73",
+			"toSide":"top"
+		}
+	],
+	"metadata":{
+		"frontmatter":{},
+		"version":"1.0-1.0"
+	},
+	"nodes":[
+		{"file":"Reconfigurable Architecture VLSI/D/GateL_Latch.md","id":"70bf9a7e0a001d08","type":"file","x":3821,"y":1170,"width":720,"height":500},
+		{"id":"ed6eba6d9977a892","text":"<center><h2> Latch\n","type":"text","x":4181,"y":560,"width":365,"height":100},
+		{"id":"4625124d29da2f3e","text":"<center><h2> FF\n","type":"text","x":4901,"y":560,"width":365,"height":100},
+		{"file":"Reconfigurable Architecture VLSI/D/Gatel_FF.md","id":"46a45ac57a0a5d82","type":"file","x":5000,"y":1170,"width":720,"height":500},
+		{"file":"Reconfigurable Architecture VLSI/D/Beh_FF.md","id":"c17bc2f13f88ed50","type":"file","x":5821,"y":1170,"width":720,"height":500},
+		{"file":"DE/Sequential/FF/D.md","id":"50116b187e54489b","type":"file","x":4363,"y":-140,"width":720,"height":520},
+		{"file":"Reconfigurable Architecture VLSI/D/Beh_Latch.md","id":"db82714771474513","type":"file","x":2981,"y":1170,"width":720,"height":500},
+		{"file":"Reconfigurable Architecture VLSI/SR/Beh_Latch.md","id":"7727e7169247efff","type":"file","x":-1600,"y":1170,"width":720,"height":500},
+		{"file":"Reconfigurable Architecture VLSI/SR/DataF_Latch.md","id":"cf230755cb849826","type":"file","x":-779,"y":1170,"width":720,"height":500},
+		{"file":"Reconfigurable Architecture VLSI/SR/GateL_Latch.md","id":"92b1612ae9301831","type":"file","x":61,"y":1170,"width":720,"height":500},
+		{"id":"0878d0c540e948e4","text":"<center><h2>SR Latch\n","type":"text","x":421,"y":560,"width":365,"height":100},
+		{"file":"DE/Sequential/FF/SR.md","id":"c848f21ad704fb04","type":"file","x":603,"y":-120,"width":720,"height":500},
+		{"id":"84069416eec9a384","text":"<center><h2>SR FF\n","type":"text","x":1141,"y":560,"width":365,"height":100},
+		{"file":"Reconfigurable Architecture VLSI/SR/Beh_FF.md","id":"170efa6245656656","type":"file","x":2061,"y":1170,"width":720,"height":500},
+		{"file":"Reconfigurable Architecture VLSI/JK/Beh.md","id":"99b5caa71ed94507","type":"file","x":6880,"y":1170,"width":720,"height":500},
+		{"file":"DE/Sequential/FF/JK.md","id":"e61a7988ecb2d07e","type":"file","x":7701,"y":-80,"width":720,"height":500},
+		{"file":"Reconfigurable Architecture VLSI/JK/GateL.md","id":"32a4468b48a65d70","type":"file","x":7701,"y":1170,"width":720,"height":500},
+		{"file":"Reconfigurable Architecture VLSI/T/Beh.md","id":"23c21f4fcb4b34dc","type":"file","x":9643,"y":1170,"width":720,"height":500},
+		{"file":"DE/Sequential/FF/T.md","id":"931f90fd64066354","type":"file","x":10440,"y":-80,"width":720,"height":500},
+		{"file":"Reconfigurable Architecture VLSI/T/DataF.md","id":"906011761df00b07","type":"file","x":10440,"y":1170,"width":720,"height":500},
+		{"file":"Reconfigurable Architecture VLSI/T/GateL.md","id":"28eb851fbacffc73","type":"file","x":11262,"y":1170,"width":720,"height":500},
+		{"file":"Reconfigurable Architecture VLSI/JK/DataF.md","id":"edb73e1106a48677","type":"file","x":8520,"y":1170,"width":720,"height":500},
+		{"file":"Reconfigurable Architecture VLSI/SR/GateL_FF.md","id":"56eae31b72b05415","type":"file","x":1240,"y":1170,"width":720,"height":550}
+	]
+}

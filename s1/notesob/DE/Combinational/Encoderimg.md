@@ -1,0 +1,6 @@
+![[Encoder_1.png]]
+![[Encoder_6.png]]
+![[Encoder_2.png]]
+![[Encoder_3.png]]
+![[Encoder_4.png]]
+![[Encoder_5.png]]

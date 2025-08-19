@@ -1,0 +1,258 @@
+# Semiconductor Material Basics
+
+#### Atom Structure:
+
+* **Energy:** Increases with shell radius (further = higher energy).
+* **Valence Electrons:** Outermost shell electrons – determine chemical activity.
+
+| ![[Semiconductor Material.png]] | ![[Semiconductor Material Periodic Table.png]] |
+| ------------------------------- | ------------------------------------ |
+
+#### Semiconductors & Periodic Table:
+
+* **Grouped by Valence Electrons:** Periodic table organizes elements by these.
+* **Elemental Semiconductors:** Silicon (Si) & Germanium (Ge) - Group IV.
+* **Compound Semiconductors:** Gallium Arsenide (Group III-V). 
+* **Key Groups:** III & V are also important in semiconductors.
+
+
+
+**Key takeaway:** Valence electrons dictate how atoms interact, and the periodic table helps us understand semiconductor properties based on electron arrangement.
+
+
+---
+
+#### Silicon & Semiconductor Basics 
+
+![[Silicon Structure.png]]
+
+* **Silicon Structure:** Starts with 5 isolated Si atoms, each with 4 valence electrons.
+* **Bonding:** When Si atoms get close, valence electrons *share* to form **covalent bonds**.
+* **Crystal Formation:** Results in a **tetrahedral** structure – each Si atom has 4 nearest neighbors. (Common to Ge, GaAs etc.)
+* **Lattice:** Forms a repeating lattice structure (see Fig 1.1c).
+* **Key Property:** Outer edges have available valence electrons – allows for growth of *large, single crystals*.
+
+
+
+**Essentially:** Silicon forms strong covalent bonds in a tetrahedral arrangement, creating a lattice that can grow into large crystals due to available electrons on the edges.
+
+
+---
+#### Silicon & Conductivity 
+
+![[Band Diagram.png]]
+
+* **Silicon at 0K:**
+    *  2D representation shows covalent bonds (valence electrons linking atoms).
+    *  All bonding positions *filled* - electrons bound to atoms.
+    *  Therefore, acts as an *insulator* - no charge flow.
+
+* **Crystal Formation & Energy Bands:**
+    * Atoms forming crystal = electrons occupy *allowed energy bands*.
+    * 0K: All valence electrons in *valence band*.
+    * Increased Temp: Electrons gain *thermal energy*.
+
+* **Bandgap & Conduction:**
+    *  To break covalent bond & become *free*, electron needs min. energy = *Eg (bandgap energy)*.
+    *  Electrons gaining Eg move to *conduction band* - become *free electrons*.
+    *  Flow of free electrons in conduction band = *current*.
+
+* **Energy Band Diagram:**
+    * *Ev* = max energy of valence band.
+    * *Ec* = min energy of conduction band.
+    * *Eg = Ec - Ev* = *bandgap energy*. 
+    * Region between Ev & Ec = *forbidden bandgap* – electrons can't exist here.
+    *  Electron moving from valence to conduction band = *generation*.
+
+* **Material Classification (based on Eg):**
+    * **Insulators:** Large Eg (3-6 eV) – *few to no* free electrons at room temp.
+    * **Conductors:**  *Many* free electrons at room temp.
+    * **Semiconductors:** Eg ~ 1 eV – intermediate conductivity. 
+
+
+---
+
+#### Electron Concentration 
+
+| ![[Hole move 1.png]] | ![[Hole Move 2.png]] | ![[Hole run.png]] |
+| -------------------- | -------------------- | ------------------------------------ |
+
+- Semiconductors are (charge) neutral overall.
+- Breaking covalent bonds creates free electrons and positive “holes” (empty states).
+- Increased temperature $\implies$ more free electrons & holes.
+- Holes behave like positive charge carriers.
+- Current is carried by both electrons (negative) and holes (positive).
+- Electron & hole concentrations are key parameters affecting current.
+
+#### Intrinsic Semiconductor
+
+- Pure, single-crystal semiconductor.
+- In intrinsic semiconductors, electron & hole densities are equal: $n_i$.
+- $n_i$ is the intrinsic carrier concentration. 
+
+- **Equation for $n_i$:**
+ $$
+n_i = BT^{3/2}e^{-\frac{E_g}{2kT}} 
+ $$
+
+- Where:
+ - $B$ = material-dependent coefficient
+ - $E_g$ = bandgap energy (eV)
+ - $T$ = temperature (K)
+ - $k$ = Boltzmann’s constant ($8.6 \times 10^{-6}$ eV/K)
+ - $e$ = exponential function
+- $E_g$ & $B$ are relatively constant with temperature. 
+- $n_i$ appears in current-voltage equations for devices.
+
+##### Hole Movement:
+
+ - A valence electron can move *into* an adjacent hole.
+ - This effectively causes the hole to *move* to the location where the electron came from.
+ - Hole movement is the collective result of electrons filling vacancies.
+ - Although electrons are the actual moving particles, the *hole* concept simplifies analysis by treating it as a positive charge carrier.
+
+---
+
+#### Extrinsic semiconductors
+
+* Intrinsic semiconductors have small electron/hole concentrations, limiting current.
+* Impurities (dopants) increase carrier concentrations.
+* Group III & V elements are common dopants for Silicon.
+* **n-type Semiconductor:**
+    * Group V (e.g., Phosphorus) donates extra electrons.
+    * Creates free electrons without holes.
+    * Donor impurity donates electrons, becomes immobile positive ion.
+    * $n$-type has more electrons than holes.
+* **p-type Semiconductor:**
+    * Group III (e.g., Boron) creates “holes” by lacking electrons for bonds.
+    * Acceptor impurity accepts electrons, becomes immobile negative ion.
+    * $p$-type has more holes than electrons.
+* **Doping:** The process of adding impurities to control carrier concentrations.
+* **Extrinsic Semiconductor:** Semiconductor with added impurities (doped semiconductor).
+* **Carrier Concentration Relationship (Thermal Equilibrium):**
+    $$ n_o p_o = n_i^2 $$
+    * $n_o$: electron concentration
+    * $p_o$: hole concentration
+    * $n_i$: intrinsic carrier concentration
+* **Approximations (Room Temperature):**
+    * If $N_d >> n_i$ (Donor concentration much larger than intrinsic):  $n_o \approx N_d$
+    * Then: $p_o = \frac{n_i^2}{N_d}$
+    * If $N_a >> n_i$ (Acceptor concentration much larger than intrinsic): $p_o \approx N_a$
+    * Then: $n_o = \frac{n_i^2}{N_a}$
+* **Majority & Minority Carriers:**
+    * **n-type:** Electrons are majority carriers, holes are minority carriers.
+    * **p-type:** Holes are majority carriers, electrons are minority carriers.
+
+| ![[Extrinsic Semiconductor P.png]] |
+| ------------------------------------ |
+| ![[Extrinsic Semiconductor B.png]] |
+
+---
+
+## Semiconductor Carrier Movement & Current
+
+- **Charge Carriers:** Electrons & Holes – generate current when moving.
+
+- **Carrier Movement Mechanisms:**
+    - **Drift:** Movement due to electric field (E).
+    - **Diffusion:** Movement due to concentration gradients.
+
+### Drift Current
+
+- **Drift Velocity & Current Density:**
+    - **Electron Drift Velocity (n-type):** $v_{dn} = -μ_n E$ 
+        - $μ_n$: Electron mobility (cm²/V–s), typically 1350 cm²/V–s in Si.
+        - $E$: Applied Electric ﬁeld
+    - The negative sign indicates that $v_{dn}$ is opposite to that of the applied $E$.
+
+    - **Electron Drift Current Density:** $J_n = -enμ_n E = enμ_n E$ 
+        - n: Electron concentration (#/cm³)
+        - e: electronic charge. 
+    - The negative sign indicates that $J_{n}$ is in same direction as the applied $E$.
+
+    - **Hole Drift Velocity (p-type):** $v_{dp} = +μ_p E$
+        - $μ_p$: Hole mobility (cm²/V–s), typically 480 cm²/V–s in Si.
+    - $μ_p$ is less than half of $μ_n$ and the positive sign indicates that it is in same direction as $E$.
+
+    - **Hole Drift Current Density:** $J_p = +epμ_p E$
+        - p: Hole concentration (#/cm³).
+
+![[Drift.png]]
+### Total Current & Conductivity
+
+- **Total Drift Current Density:**
+	- Since a semiconductor contains both electrons and holes $J = enμ_n E + epμ_p E = σE$
+    - **Conductivity:** $σ = enμ_n + epμ_p$ $( \ohm–cm)⁻¹$
+    - **Resistivity:** $ρ = 1/σ$ $( \ohm–cm)$
+    - This relates to Ohm’s Law: $J = σE$ (linear for small voltage).
+
+
+
+- **Conductivity Control:** 
+    - Doping controls conductivity by changing n & p concentrations.
+    - n >> p: strongly n-type
+    - p >> n: strongly p-type
+
+- **Important Considerations:**
+    - **Drift Velocity Saturation:** At high E fields, drift velocity reaches a max (~10⁷ cm/s).
+    - **Mobility Dependence:** Mobility decreases with increasing impurity concentration. Conductivity isn’t always linear with doping.
+
+---
+
+## Diffusion Current Density 
+
+* **Diffusion Basics:**
+	* Particles move from high to low concentration due to random thermal motion. It's a statistical phenomenon.
+	* Electrons and holes in semiconductors are in continuous, randomized motion.
+
+* **Particle Flow:**  Approximately half the particles move *away* from high concentration, and half *towards* it from low concentration. Net flow is from high to low concentration due to the differing number of particles.
+
+![[Carrier concentration.png]]
+
+* **Direction & Conventional Current:**
+    * Electron diffusion (high to low concentration) results in current in the +x direction.
+    * Hole diffusion (high to low concentration) results in current in the -x direction.
+* **Diffusion Current Density Equations (1D):**
+    * Electrons: $J_n = eD_n \frac{dn}{dx}$
+    * Holes: $J_p = -eD_p \frac{dp}{dx}$ 
+    * Where:
+        * $e$ = magnitude of electronic charge
+        * $D_n, D_p$ = electron/hole diffusion coefficients
+        * $\frac{dn}{dx}, \frac{dp}{dx}$ = concentration gradients
+* **Einstein Relation:** Links mobility and diffusion coefficients.
+    $$ \frac{D_n}{\mu_n} = \frac{D_p}{\mu_p} = \frac{kT}{e} \approx 0.026V $$
+    * $k$ = Boltzmann constant
+    * $T$ = Temperature
+    * $\mu_n, \mu_p$ = electron/hole mobilities 
+* **Total Current Density:**  $J_{total} = J_{drift} + J_{diffusion}$. Often, one component dominates in a given region. 
+
+
+---
+
+## Excess Carriers
+
+* **Non-Equilibrium:** Semiconductor devices often operate *not* in thermal equilibrium due to applied voltages/currents. This leads to *nonequilibrium carrier concentrations*.
+
+* **Excess Carriers:** 
+    - Created by energy input (e.g., photons). 
+    - Generates *electron-hole pairs*.
+    - Defined as additional electrons and holes beyond equilibrium.
+
+* **Carrier Concentration:**
+    - $n = n_o + \delta n$ 
+    - $p = p_o + \delta p$
+    - Where:
+        - $n_o$, $p_o$ = Equilibrium electron & hole concentrations
+        - $\delta n$, $\delta p$ = Excess electron & hole concentrations
+
+* **Recombination:**
+    - Excess carriers don’t accumulate indefinitely.
+    - Electrons & holes recombine, eliminating excess carriers.
+    - Results in a *steady-state excess carrier concentration*.
+
+* **Excess Carrier Lifetime:** 
+    - The average time an excess electron/hole exists before recombination.
+
+* **Applications:** Excess carriers are crucial to the operation of devices like:
+    - Solar cells
+    - Photodiodes (discussed in Section 1.5)

@@ -1,0 +1,3 @@
+| ![[blocking.png]]    |
+| -------------------- |
+| ![[nonBlocking.png]] |

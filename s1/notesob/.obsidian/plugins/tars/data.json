@@ -1,0 +1,102 @@
+{
+  "editorStatus": {
+    "isTextInserting": false
+  },
+  "providers": [
+    {
+      "tag": "deepseek",
+      "vendor": "Ollama",
+      "options": {
+        "apiKey": "",
+        "baseURL": "http://[2405:201:500f:584d:1050:2c14:533a:6dfb]:11434/",
+        "model": "deepseek-r1:14b",
+        "parameters": {}
+      }
+    },
+    {
+      "tag": "gemma3",
+      "vendor": "Ollama",
+      "options": {
+        "apiKey": "",
+        "baseURL": "http://[2405:201:500f:584d:1050:2c14:533a:6dfb]:11434/",
+        "model": "gemma3:12b",
+        "parameters": {}
+      }
+    },
+    {
+      "tag": "qwen3",
+      "vendor": "Ollama",
+      "options": {
+        "apiKey": "",
+        "baseURL": "http://[2405:201:500f:584d:1050:2c14:533a:6dfb]:11434/",
+        "model": "qwen3:14b",
+        "parameters": {}
+      }
+    },
+    {
+      "tag": "mistral-small3",
+      "vendor": "Ollama",
+      "options": {
+        "apiKey": "",
+        "baseURL": "http://[2405:201:500f:584d:1050:2c14:533a:6dfb]:11434/",
+        "model": "mistral-small3.2:latest",
+        "parameters": {}
+      }
+    },
+    {
+      "tag": "Gemini",
+      "vendor": "Gemini",
+      "options": {
+        "apiKey": "AIzaSyCwJ2pQwxNZFDlWix9bIFrYteRISH8WlU0",
+        "baseURL": "https://generativelanguage.googleapis.com",
+        "model": "gemini-1.5-flash",
+        "parameters": {}
+      }
+    },
+    {
+      "tag": "qwen2",
+      "vendor": "Ollama",
+      "options": {
+        "apiKey": "",
+        "baseURL": "http://[2405:201:500f:584d:1050:2c14:533a:6dfb]:11434/",
+        "model": "qwen2.5vl:7b-fp16",
+        "parameters": {}
+      }
+    },
+    {
+      "tag": "Qwen",
+      "vendor": "Qwen",
+      "options": {
+        "apiKey": "",
+        "baseURL": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+        "model": "qwen-turbo",
+        "parameters": {}
+      }
+    }
+  ],
+  "systemTags": [
+    "System"
+  ],
+  "newChatTags": [
+    "NewChat"
+  ],
+  "userTags": [
+    "User"
+  ],
+  "roleEmojis": {
+    "assistant": "✨",
+    "system": "🔧",
+    "newChat": " 🚀",
+    "user": "💬"
+  },
+  "promptTemplates": [],
+  "enableInternalLink": true,
+  "answerDelayInMilliseconds": 4000,
+  "confirmRegenerate": true,
+  "enableTagSuggest": true,
+  "tagSuggestMaxLineLength": 28,
+  "enableExportToJSONL": false,
+  "enableReplaceTag": false,
+  "enableDefaultSystemMsg": false,
+  "defaultSystemMsg": ""
+}

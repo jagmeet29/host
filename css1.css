@@ -1,0 +1,297 @@
+* {
+    font-family: 'Sansita';
+    padding: 0px;
+    margin: 0px;
+}
+
+h1,h2,h3 {
+        font-family: 'Trirong';
+}
+
+#home img {
+    width: 300px;
+}
+
+#home {
+    height: 100vh;
+    text-align: center;
+    padding-top: 80px; /* Add padding to account for fixed nav */
+}
+
+#home h1 {
+    padding-top: 40vh;
+    font-size: 4rem;
+    padding-bottom: 2rem;
+}
+
+nav {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+   
+}
+
+nav ul {
+    padding: 1.3rem;
+    text-align: center;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    padding: 8px 16px;
+    margin: 5px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+}
+
+nav a:hover {
+    background-color: rgba(172, 191, 132, 0.2);
+    transform: translateY(-2px);
+}
+
+nav a.active {
+    background-color: #ACBF84;
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: white;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
+
+#about h2, #skills h2, #certificates h2 ,#projects h2 ,#contact h2, #blog h2{
+    color:#5B7343;
+    font-size: 2rem;
+    padding: 1rem 0;
+    padding-top: 8rem;
+}
+
+#about, #skills , #certificates , #projects, #contact , #home, #blog {
+    max-width: 800px;
+    padding: 30px;
+    margin: 0 auto;
+
+}
+
+ #certificate {
+    display:flex;
+    flex-wrap:wrap;
+    align-items: flex-end;
+    justify-content: center; /* centers items evenly */
+    gap: 20px; /* space between items */
+ }
+  #contact a {
+    text-decoration: none;
+    color: blueviolet;
+
+  }
+
+  #contact h2 {
+    padding-top: 0%;
+  }
+
+  #color {
+    background-color: #ECF2D8;
+    padding: 0;
+    margin: 0; 
+  }
+
+ #certificates img {
+    height: 200px;
+    border-radius: 9px;
+ }
+
+ #home button {
+    padding: 5px 9px;
+    border-radius: 9px;
+    margin: 10px;
+    border: none;
+    font-size: 1rem;
+ }
+ .imgc { 
+    border: 3px solid #bababa;
+    overflow: hidden;
+    border-radius: 9px; 
+
+ }
+ 
+ .skill-card {
+    background-color:#cccccc44;
+    border-radius: 9px;
+    padding: 1rem;
+    width: 200px;
+    height: 150px;
+ }
+  .skill-card li {
+    list-style-type: none;
+  }
+
+.skill-card h3 {
+    font-size: 1.3rem;
+    padding-bottom: 1rem;
+  }
+  #blog video {
+    width: 100%; /* Make video responsive */
+    max-width: 600px; /* Set a max-width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 9px; /* Match other elements */
+    display: block; /* Ensure it's a block element for margin auto to work */
+    margin: 20px auto; /* Center the video with some vertical spacing */
+    border: 3px solid #bababa; /* Add a border like other images */
+  }
+
+.skills-grid {
+display: flex;
+flex-wrap: wrap;
+gap: 9px;    
+align-items: flex-end;
+justify-content: center; /* centers items evenly */
+ }
+
+
+
+ #about p {
+    line-height: 1.9rem;
+    font-size: 1.2rem;
+    text-align: justify;
+    font-family: Monda;
+    border: #ccc dotted 0.5px;
+    padding: 10px;
+    border-radius: 9px;
+
+}
+/* Remove duplicate nav a.active rule since we already defined it above */
+
+ 
+@media (max-width: 800px) {
+  /* CSS styles for screens up to 800px wide */
+  
+  /* Navigation adjustments for mobile */
+  nav ul {
+    padding: 0.8rem 0.5rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+  
+  nav ul::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+  
+  nav li {
+    display: inline-block;
+    margin: 0 2px;
+  }
+  
+  nav a {
+    padding: 6px 12px;
+    margin: 2px;
+    font-size: 0.9rem;
+    border-radius: 15px;
+  }
+  
+  /* Home section adjustments */
+  #home {
+    padding-top: 70px;
+  }
+  
+  #home h1 {
+    font-size: 2.5rem;
+    padding-top: 40vh;
+    padding-bottom: 1rem;
+  }
+
+
+
+  /* About section adjustments */
+  #about p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding: 8px;
+  }
+  
+  /* Section headings */
+  #about h2, #skills h2, #certificates h2, #projects h2, #contact h2 {
+    font-size: 1.8rem;
+    padding-top: 6rem;
+  }
+  
+  /* Skills grid adjustments */
+  .skill-card {
+    width: 160px;
+    height: 140px;
+    padding: 0.8rem;
+  }
+  
+  .skill-card h3 {
+    font-size: 1.1rem;
+    padding-bottom: 0.8rem;
+  }
+  
+  /* Certificate images */
+  #certificates img {
+    height: 150px;
+  }
+  
+  /* General section padding */
+  #about, #skills, #certificates, #projects, #contact, #home {
+    padding: 20px 15px;
+  }
+}
+
+/* Additional styles for very small screens */
+@media (max-width: 480px) {
+  nav ul {
+    padding: 0.6rem 0.3rem;
+  }
+  
+
+  nav a {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+    margin: 1px;
+  }
+  
+  #home h1 {
+    font-size: 2rem;
+    padding-top: 40vh;
+  }
+  
+
+  #about h2, #skills h2, #certificates h2, #projects h2, #contact h2 {
+    font-size: 1.5rem;
+    padding-top: 5rem;
+  }
+  
+  .skill-card {
+    width: 140px;
+    height: 160px;
+  }
+  
+  .skill-card h3 {
+    font-size: 1rem;
+  }
+  
+  #certificates img {
+    height: 120px;
+  }
+  
+  #certificate {
+    gap: 15px;
+  }
+}
+
+
+#home pre {
+  font-size: 1rem;
+}

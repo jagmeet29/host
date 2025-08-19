@@ -1,0 +1,19 @@
+{
+  "files": [
+    "Best Practices.md",
+    "Timescale & Instantiation.md",
+    "clockPlay.md",
+    "delay.md",
+    "directory-listing.json",
+    "function.md",
+    "notUseDefparamm.md",
+    "parameter.md",
+    "systemTask&Dump.md",
+    "task.md",
+    "tbExamples.md",
+    "teshbench.md"
+  ],
+  "folders": [],
+  "path": "D:\\my\\Whiteboards\\study\\Hosted\\s1\\notesob\\Verilog\\Other",
+  "last_updated": "1755516103.0929408"
+}
